@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASP Fit | Tracker</title>
+</head>
+<body>
+    
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="logo">
+            <h2>ASP Fit</h2>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="tracker.html" class="active">Tracker</a></li>
+            <li><a href="exercises.html">Exercises</a></li>
+            <li><a href="progress.html">Progress</a></li>
+            <li><a href="learn.html">Learn</a></li>
+            <li><a href="profile.html">Profile</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Tracker Content -->
+    <main class="tracker-content">
+        
+        <!-- Tracker Header -->
+        <header class="tracker-header">
+            <div>
+                <h1>Workout Tracker</h1>
+                <p>Log your session and beat your records.</p>
+            </div>
+            <!-- The Bright Blue Primary Button -->
+            <button id="start-timer-btn" class="btn-primary">⏱ Start Rest Timer</button>
+        </header>
+
+        <!-- Workout Form -->
+        <section class="workout-logging-section">
+            <form id="workout-form">
+                
+                <!-- Session Details -->
+                <div class="session-metadata">
+                    <div class="input-group">
+                        <label for="workout-date">Date</label>
+                        <input type="date" id="workout-date" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="workout-type">Split</label>
+                        <select id="workout-type">
+                            <option value="Push">Push</option>
+                            <option value="Pull">Pull</option>
+                            <option value="Legs">Legs</option>
+                            <option value="Full Body">Full Body</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Exercise List (JavaScript will add rows here dynamically) -->
+                <div id="exercise-list-container">
+                    <h3>Exercises</h3>
+                    
+                    <!-- Example of a single exercise block -->
+                    <div class="exercise-block">
+                        <h4>Bench Press</h4>
+                        <div class="set-row">
+                            <span class="set-number">Set 1</span>
+                            <input type="number" placeholder="kg" class="weight-input">
+                            <input type="number" placeholder="reps" class="reps-input">
+                            <input type="checkbox" class="done-check">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="form-actions">
+                    <button type="button" id="add-exercise-btn" class="btn-secondary">+ Add Exercise</button>
+                    <button type="submit" id="finish-workout-btn" class="btn-primary">Finish Workout</button>
+                </div>
+                
+            </form>
+        </section>
+
+    </main>
+
+</body>
+</html>
