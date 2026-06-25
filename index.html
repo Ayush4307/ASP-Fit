@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASP Fit | Dashboard</title>
+    <!-- We will link CSS files here later -->
+    <!-- <link rel="stylesheet" href="css/main.css"> -->
+</head>
+<body>
+    
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="logo">
+            <h2>ASP Fit</h2>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Dashboard</a></li>
+            <li><a href="tracker.html">Tracker</a></li>
+            <li><a href="exercises.html">Exercises</a></li>
+            <li><a href="progress.html">Progress</a></li>
+            <li><a href="learn.html">Learn</a></li>
+            <li><a href="profile.html">Profile</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Dashboard Content -->
+    <main class="dashboard-content">
+        
+        <!-- Welcome Header -->
+        <header class="dashboard-header">
+            <h1>Welcome back, Ayush</h1>
+            <p class="streak-badge">🔥 4 Day Streak</p>
+        </header>
+
+        <!-- Daily Motivation Section -->
+        <section class="daily-quote-section">
+            <blockquote id="daily-quote">
+                "The only bad workout is the one that didn't happen."
+            </blockquote>
+        </section>
+
+        <!-- Daily Task Section -->
+        <section class="daily-task-section">
+            <h2>Today's Focus</h2>
+            <div class="task-card">
+                <input type="checkbox" id="daily-task-checkbox">
+                <label for="daily-task-checkbox" id="daily-task-text">Hit 10k steps today</label>
+            </div>
+        </section>
+
+        <!-- Recent Activity Placeholder -->
+        <section class="recent-activity-section">
+            <h2>Recent Workouts</h2>
+            <div class="activity-card">
+                <p><strong>Push Day (Hypertrophy)</strong></p>
+                <span>Yesterday • 1h 15m</span>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>
