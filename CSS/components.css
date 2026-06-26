@@ -1,0 +1,135 @@
+/* css/components.css */
+
+/* --- Sidebar Navigation --- */
+.sidebar {
+    width: 250px;
+    background-color: var(--bg-surface);
+    border-right: 1px solid var(--border-color);
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    left: 0;
+    top: 0;
+}
+
+.sidebar .logo h2 {
+    color: var(--accent-blue);
+    margin-bottom: 2.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.nav-links li {
+    margin-bottom: 0.5rem;
+}
+
+.nav-links a {
+    display: block;
+    padding: 0.75rem 1rem;
+    border-radius: var(--border-radius);
+    color: var(--text-secondary);
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.nav-links a:hover {
+    background-color: #F1F5F9;
+    color: var(--text-primary);
+}
+
+.nav-links a.active {
+    background-color: var(--accent-blue);
+    color: #FFFFFF;
+}
+
+/* --- Main Layout Wrappers --- */
+.dashboard-content, .tracker-content, .exercises-content, .progress-content, .learn-content, .profile-content {
+    margin-left: 250px; /* Offset to push content past the sidebar */
+    padding: 3rem;
+    width: calc(100% - 250px);
+    max-width: 1200px;
+}
+
+/* --- Cards --- */
+.card, .task-card, .activity-card, .exercise-card, .article-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover, .task-card:hover, .activity-card:hover, .exercise-card:hover, .article-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+/* --- Buttons --- */
+.btn-primary {
+    background-color: var(--accent-blue);
+    color: #FFFFFF;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-blue-hover);
+}
+
+.btn-secondary {
+    background-color: #FFFFFF;
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #F8FAFC;
+}
+
+/* --- Form Inputs --- */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.25rem;
+}
+
+.input-group label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+}
+
+input[type="text"], 
+input[type="number"], 
+input[type="date"], 
+select {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+input:focus, select:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
