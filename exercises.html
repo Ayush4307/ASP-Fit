@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASP Fit | Exercise Library</title>
+</head>
+<body>
+    
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="logo">
+            <h2>ASP Fit</h2>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="tracker.html">Tracker</a></li>
+            <li><a href="exercises.html" class="active">Exercises</a></li>
+            <li><a href="progress.html">Progress</a></li>
+            <li><a href="learn.html">Learn</a></li>
+            <li><a href="profile.html">Profile</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Exercises Content -->
+    <main class="exercises-content">
+        
+        <header class="exercises-header">
+            <h1>Exercise Library</h1>
+            <p>Master your form and learn new movements.</p>
+        </header>
+
+        <!-- Filter Bar -->
+        <section class="filter-section">
+            <div class="filter-bar">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Chest</button>
+                <button class="filter-btn">Back</button>
+                <button class="filter-btn">Legs</button>
+                <button class="filter-btn">Shoulders</button>
+                <button class="filter-btn">Arms</button>
+                <button class="filter-btn">Core</button>
+            </div>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" id="exercise-search" placeholder="Search exercises...">
+            </div>
+        </section>
+
+        <!-- Exercise Grid -->
+        <section class="exercise-grid-section">
+            <div class="exercise-grid" id="exercise-grid">
+                
+                <!-- Example Exercise Card 1 -->
+                <div class="exercise-card" data-muscle="Chest">
+                    <div class="card-front">
+                        <h3>Barbell Bench Press</h3>
+                        <span class="muscle-tag">Chest</span>
+                    </div>
+                </div>
+
+                <!-- Example Exercise Card 2 -->
+                <div class="exercise-card" data-muscle="Legs">
+                    <div class="card-front">
+                        <h3>Barbell Squat</h3>
+                        <span class="muscle-tag">Legs</span>
+                    </div>
+                </div>
+
+                <!-- Example Exercise Card 3 -->
+                <div class="exercise-card" data-muscle="Back">
+                    <div class="card-front">
+                        <h3>Pull-Ups</h3>
+                        <span class="muscle-tag">Back</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>
