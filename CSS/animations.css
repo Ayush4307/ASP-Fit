@@ -1,0 +1,60 @@
+/* css/animations.css */
+
+/* --- Page Load Fade-In --- */
+/* We apply this to the main content area so the sidebar stays fixed but the content smoothly appears */
+.dashboard-content, 
+.tracker-content, 
+.exercises-content, 
+.progress-content, 
+.learn-content, 
+.profile-content {
+    animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0; /* Starts invisible */
+}
+
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- The Pulse Effect for the Timer Button --- */
+/* This draws the user's eye to the primary action on the tracker page */
+#start-timer-btn {
+    animation: gentlePulse 2s infinite;
+}
+
+@keyframes gentlePulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(37, 99, 235, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+    }
+}
+
+/* --- Streak Badge Flame Animation --- */
+.streak-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: rgba(255, 184, 0, 0.15); /* Soft gold background */
+    color: #B45309; /* Deep orange/gold text */
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    animation: flicker 3s infinite alternate;
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.85; }
+}
