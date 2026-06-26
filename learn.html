@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASP Fit | Knowledge Hub</title>
+</head>
+<body>
+    
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="logo">
+            <h2>ASP Fit</h2>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="tracker.html">Tracker</a></li>
+            <li><a href="exercises.html">Exercises</a></li>
+            <li><a href="progress.html">Progress</a></li>
+            <li><a href="learn.html" class="active">Learn</a></li>
+            <li><a href="profile.html">Profile</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Learn Content -->
+    <main class="learn-content">
+        
+        <header class="learn-header">
+            <h1>Knowledge Hub</h1>
+            <p>Science-backed articles on training, nutrition, and recovery.</p>
+        </header>
+
+        <section class="article-grid-section">
+            <div class="article-grid">
+                
+                <!-- Article Card 1 -->
+                <article class="article-card">
+                    <div class="article-image-placeholder"></div>
+                    <div class="article-content">
+                        <span class="article-category">Training</span>
+                        <h3>The Science of Progressive Overload</h3>
+                        <p>Why lifting heavier over time is the only way to grow.</p>
+                        <button class="btn-read-more">Read Article →</button>
+                    </div>
+                </article>
+
+                <!-- Article Card 2 -->
+                <article class="article-card">
+                    <div class="article-image-placeholder"></div>
+                    <div class="article-content">
+                        <span class="article-category">Recovery</span>
+                        <h3>Optimizing Sleep for Hypertrophy</h3>
+                        <p>How missing out on sleep destroys your gains.</p>
+                        <button class="btn-read-more">Read Article →</button>
+                    </div>
+                </article>
+
+                <!-- Article Card 3 -->
+                <article class="article-card">
+                    <div class="article-image-placeholder"></div>
+                    <div class="article-content">
+                        <span class="article-category">Nutrition</span>
+                        <h3>Protein Timing: Does it Matter?</h3>
+                        <p>The truth about the anabolic window and post-workout meals.</p>
+                        <button class="btn-read-more">Read Article →</button>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Article Reading Modal (Hidden by default, triggered by JS later) -->
+        <div id="article-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2 id="modal-title">Article Title</h2>
+                <div id="modal-body">
+                    <!-- JavaScript will inject the full article text here -->
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+</body>
+</html>
