@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASP Fit | Progress</title>
+</head>
+<body>
+    
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="logo">
+            <h2>ASP Fit</h2>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="tracker.html">Tracker</a></li>
+            <li><a href="exercises.html">Exercises</a></li>
+            <li><a href="progress.html" class="active">Progress</a></li>
+            <li><a href="learn.html">Learn</a></li>
+            <li><a href="profile.html">Profile</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Progress Content -->
+    <main class="progress-content">
+        
+        <header class="progress-header">
+            <h1>Progress & Analytics</h1>
+            <p>Track your volume, consistency, and personal records.</p>
+        </header>
+
+        <!-- We use a grid to lay out the different analytics cards -->
+        <div class="analytics-grid">
+            
+            <!-- Chart Section -->
+            <section class="chart-section card">
+                <h2>Weekly Volume (kg)</h2>
+                <div class="chart-container">
+                    <!-- JavaScript/Chart.js will draw the graph on this canvas -->
+                    <canvas id="volumeChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Heatmap Section -->
+            <section class="heatmap-section card">
+                <h2>Consistency Map</h2>
+                <div id="consistency-heatmap" class="heatmap-grid">
+                    <!-- JavaScript will inject the GitHub-style 52-week grid here -->
+                    <p class="placeholder-text">Heatmap loading...</p>
+                </div>
+            </section>
+
+            <!-- Personal Records Section -->
+            <section class="pr-section card">
+                <h2>Personal Records 🏆</h2>
+                <ul id="pr-list" class="pr-list">
+                    
+                    <!-- Example PR Items (JS will replace these with real data later) -->
+                    <li class="pr-item">
+                        <div class="pr-info">
+                            <strong>Bench Press</strong>
+                            <span>100kg × 5 reps</span>
+                        </div>
+                        <span class="pr-date">June 15, 2026</span>
+                    </li>
+                    
+                    <li class="pr-item">
+                        <div class="pr-info">
+                            <strong>Barbell Squat</strong>
+                            <span>140kg × 3 reps</span>
+                        </div>
+                        <span class="pr-date">June 20, 2026</span>
+                    </li>
+
+                </ul>
+            </section>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
