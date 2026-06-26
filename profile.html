@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASP Fit | Profile</title>
+</head>
+<body>
+    
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="logo">
+            <h2>ASP Fit</h2>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="tracker.html">Tracker</a></li>
+            <li><a href="exercises.html">Exercises</a></li>
+            <li><a href="progress.html">Progress</a></li>
+            <li><a href="learn.html">Learn</a></li>
+            <li><a href="profile.html" class="active">Profile</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Profile Content -->
+    <main class="profile-content">
+        
+        <!-- Profile Header -->
+        <header class="profile-header">
+            <div class="profile-info-layout">
+                <div class="avatar-placeholder">AP</div>
+                <div class="user-details">
+                    <h1>Ayush Singh Pawar</h1>
+                    <p class="join-date">Member since June 2026</p>
+                </div>
+            </div>
+            <!-- Export button so you own your data -->
+            <button id="export-data-btn" class="btn-secondary">⬇️ Export Data (JSON)</button>
+        </header>
+
+        <div class="profile-grid">
+            
+            <!-- Goals & Settings Form -->
+            <section class="goals-section card">
+                <h2>Fitness Goals</h2>
+                <form id="goals-form">
+                    
+                    <div class="input-group">
+                        <label for="target-weight">Target Bodyweight (kg)</label>
+                        <input type="number" id="target-weight" placeholder="e.g., 75">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="weekly-workouts">Weekly Workout Goal (Days)</label>
+                        <input type="number" id="weekly-workouts" placeholder="e.g., 5" min="1" max="7">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="current-program">Current Program/Split</label>
+                        <select id="current-program">
+                            <option value="PPL">Push / Pull / Legs</option>
+                            <option value="Bro Split">Bro Split</option>
+                            <option value="Upper / Lower">Upper / Lower</option>
+                            <option value="Full Body">Full Body</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Save Goals</button>
+                </form>
+            </section>
+
+            <!-- Achievements / Badges Showcase -->
+            <section class="achievements-section card">
+                <h2>Achievements</h2>
+                <div class="badges-grid">
+                    
+                    <!-- Example Badge 1 -->
+                    <div class="badge earned">
+                        <div class="badge-icon">🔥</div>
+                        <p>First Workout</p>
+                    </div>
+
+                    <!-- Example Badge 2 (Locked) -->
+                    <div class="badge locked">
+                        <div class="badge-icon">🔒</div>
+                        <p>100 Sets Logged</p>
+                    </div>
+
+                    <!-- Example Badge 3 (Locked) -->
+                    <div class="badge locked">
+                        <div class="badge-icon">🔒</div>
+                        <p>30 Day Streak</p>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
