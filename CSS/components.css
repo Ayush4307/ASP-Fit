@@ -133,3 +133,49 @@ input:focus, select:focus {
     border-color: var(--accent-blue);
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
+/* --- Mobile Optimization (Bottom Tab Bar) --- */
+@media (max-width: 768px) {
+    .sidebar {
+        flex-direction: row;
+        width: 100%;
+        height: 70px;
+        top: auto;
+        bottom: 0;
+        padding: 0;
+        border-right: none;
+        border-top: 1px solid var(--border-color);
+        z-index: 100;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .sidebar .logo {
+        display: none;
+    }
+    
+    .nav-links {
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .nav-links li {
+        margin: 0;
+        flex: 1;
+        text-align: center;
+    }
+    
+    .nav-links a {
+        padding: 0.5rem;
+        font-size: 0.75rem;
+    }
+    
+    .dashboard-content, .tracker-content, .exercises-content, .progress-content, .learn-content, .profile-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 1.5rem;
+        padding-bottom: 90px;
+    }
+}
