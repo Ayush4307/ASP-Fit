@@ -1,4 +1,4 @@
-// js/app.js
+﻿// js/app.js
 
 // --- 1. Database (localStorage) Helpers ---
 // This acts as our "backend" to save data directly in the browser
@@ -30,7 +30,7 @@ const Dashboard = {
         "Discipline is doing what you hate to do, but doing it like you love it.",
         "It never gets easier, you just get stronger.",
         "Don't stop when you're tired. Stop when you're done.",
-        "Your body can stand almost anything. It’s your mind that you have to convince."
+        "Your body can stand almost anything. Itâ€™s your mind that you have to convince."
     ],
     tasks: [
         "Hit 10k steps today.",
@@ -64,5 +64,22 @@ const Dashboard = {
 // This runs as soon as the web page loads
 document.addEventListener('DOMContentLoaded', () => {
     Storage.init();
+    ThemeManager.init();
     Dashboard.init();
 });
+
+// --- Theme Management ---
+const ThemeManager = {
+    init: () => {
+        const savedTheme = Storage.get('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-theme');
+        }
+    },
+    toggle: () => {
+        document.body.classList.toggle('dark-theme');
+        const isDark = document.body.classList.contains('dark-theme');
+        Storage.save('theme', isDark ? 'dark' : 'light');
+    }
+};
+window.toggleTheme = ThemeManager.toggle;
