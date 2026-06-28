@@ -15,6 +15,7 @@ const Storage = {
     // Initialize default data if it's the user's first time opening the app
     init: () => {
         if (!Storage.get('workouts')) Storage.save('workouts', []);
+        if (!Storage.get('customExercises')) Storage.save('customExercises', []);
         if (!Storage.get('profile')) Storage.save('profile', { 
             name: "Ayush Singh Pawar", 
             targetWeight: null, 
