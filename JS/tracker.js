@@ -17,6 +17,7 @@ const Tracker = {
 
         // 4. Set up the Rest Timer
         document.getElementById('start-timer-btn').addEventListener('click', Tracker.startTimer);
+        Tracker.initStopwatch();
     },
 
         // Stopwatch Logic
@@ -38,6 +39,23 @@ const Tracker = {
             String(hrs).padStart(2, '0') + ':' + 
             String(mins).padStart(2, '0') + ':' + 
             String(secs).padStart(2, '0');
+    },
+        startStopwatch: () => {
+        if (!Tracker.stopwatchInterval) {
+            Tracker.stopwatchInterval = setInterval(() => {
+                Tracker.stopwatchTime++;
+                Tracker.updateStopwatchDisplay();
+            }, 1000);
+        }
+    },
+    stopStopwatch: () => {
+        clearInterval(Tracker.stopwatchInterval);
+        Tracker.stopwatchInterval = null;
+    },
+    resetStopwatch: () => {
+        Tracker.stopStopwatch();
+        Tracker.stopwatchTime = 0;
+        Tracker.updateStopwatchDisplay();
     },
     addExerciseBlock: () => {
         const container = document.getElementById('exercise-list-container');
@@ -175,3 +193,4 @@ const Tracker = {
 
 // Initialize when the page loads
 document.addEventListener('DOMContentLoaded', Tracker.init);
+
