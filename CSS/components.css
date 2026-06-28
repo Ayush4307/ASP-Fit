@@ -194,3 +194,8 @@ body.dark-theme select {
     background-color: #0F172A;
     color: #F8FAFC;
 }
+
+/* --- Custom Exercise Badge Style --- */
+.custom-ex-card {
+    border-left: 4px solid var(--accent-blue) !important;
+}
