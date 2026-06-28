@@ -51,6 +51,25 @@
 
         <!-- Exercise Grid -->
         <section class="exercise-grid-section">
+                        <div class="card" style="margin-bottom: 20px;">
+                <h3 style="margin-bottom: 10px;">➕ Add Custom Exercise</h3>
+                <form id="add-custom-exercise-form">
+                    <div class="input-group">
+                        <input type="text" id="custom-ex-name" placeholder="Exercise Name (e.g., Bulgarian Split Squat)" required>
+                    </div>
+                    <div class="input-group">
+                        <select id="custom-ex-muscle" required>
+                            <option value="Chest">Chest</option>
+                            <option value="Back">Back</option>
+                            <option value="Legs">Legs</option>
+                            <option value="Shoulders">Shoulders</option>
+                            <option value="Arms">Arms</option>
+                            <option value="Core">Core</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-primary">Add Exercise</button>
+                </form>
+            </div>
             <div class="exercise-grid" id="exercise-grid">
                 
                 <!-- Example Exercise Card 1 -->
@@ -84,3 +103,4 @@
 
 </body>
 </html>
+
