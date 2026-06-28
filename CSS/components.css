@@ -179,3 +179,18 @@ input:focus, select:focus {
         padding-bottom: 90px;
     }
 }
+
+/* --- Dark Mode Component Overrides --- */
+body.dark-theme .card,
+body.dark-theme .task-card,
+body.dark-theme .activity-card,
+body.dark-theme .exercise-card,
+body.dark-theme .article-card {
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.5);
+}
+
+body.dark-theme input,
+body.dark-theme select {
+    background-color: #0F172A;
+    color: #F8FAFC;
+}
