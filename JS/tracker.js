@@ -1,4 +1,4 @@
-// JS/tracker.js
+﻿// JS/tracker.js
 
 const Tracker = {
     init: () => {
@@ -19,6 +19,26 @@ const Tracker = {
         document.getElementById('start-timer-btn').addEventListener('click', Tracker.startTimer);
     },
 
+        // Stopwatch Logic
+    stopwatchTime: 0,
+    stopwatchInterval: null,
+    
+    initStopwatch: () => {
+        document.getElementById('sw-start-btn').addEventListener('click', Tracker.startStopwatch);
+        document.getElementById('sw-stop-btn').addEventListener('click', Tracker.stopStopwatch);
+        document.getElementById('sw-reset-btn').addEventListener('click', Tracker.resetStopwatch);
+    },
+    
+    updateStopwatchDisplay: () => {
+        const display = document.getElementById('stopwatch-display');
+        const hrs = Math.floor(Tracker.stopwatchTime / 3600);
+        const mins = Math.floor((Tracker.stopwatchTime % 3600) / 60);
+        const secs = Tracker.stopwatchTime % 60;
+        display.innerText = 
+            String(hrs).padStart(2, '0') + ':' + 
+            String(mins).padStart(2, '0') + ':' + 
+            String(secs).padStart(2, '0');
+    },
     addExerciseBlock: () => {
         const container = document.getElementById('exercise-list-container');
         
@@ -74,12 +94,12 @@ const Tracker = {
         btn.style.backgroundColor = '#10B981'; // Turn green
         
         const timerInterval = setInterval(() => {
-            btn.innerText = `⏱ Rest: ${timeLeft}s`;
+            btn.innerText = `â± Rest: ${timeLeft}s`;
             timeLeft--;
 
             if (timeLeft < 0) {
                 clearInterval(timerInterval);
-                btn.innerText = "⏱ Start Rest Timer";
+                btn.innerText = "â± Start Rest Timer";
                 btn.disabled = false;
                 btn.style.backgroundColor = "var(--accent-blue)";
                 
@@ -92,7 +112,7 @@ const Tracker = {
                 oscillator.start();
                 oscillator.stop(audioCtx.currentTime + 0.5);
                 
-                alert("Rest time is up! Get back to work! 💪");
+                alert("Rest time is up! Get back to work! ðŸ’ª");
             }
         }, 1000);
     },
@@ -146,7 +166,7 @@ const Tracker = {
         allWorkouts.push(workoutData);
         Storage.save('workouts', allWorkouts);
 
-        alert("Workout saved successfully! 🚀");
+        alert("Workout saved successfully! ðŸš€");
         
         // Redirect to dashboard
         window.location.href = "index.html";
