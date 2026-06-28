@@ -24,6 +24,7 @@ const ExerciseLibrary = {
 
         // 2. Set up Search Bar
         ExerciseLibrary.initCustomForm();
+        ExerciseLibrary.renderCustomExercises();
         const searchInput = document.getElementById('exercise-search');
         if (searchInput) {
             searchInput.addEventListener('keyup', (e) => {
@@ -50,6 +51,25 @@ const ExerciseLibrary = {
             alert(name + " added to your library!");
         });
     },
+        renderCustomExercises: () => {
+        const grid = document.getElementById('exercise-grid');
+        if (!grid) return;
+        
+        const oldCustoms = grid.querySelectorAll('.custom-ex-card');
+        oldCustoms.forEach(c => c.remove());
+        
+        const customExList = Storage.get('customExercises') || [];
+        customExList.forEach(ex => {
+            const div = document.createElement('div');
+            div.className = 'exercise-card card custom-ex-card';
+            div.setAttribute('data-muscle', ex.muscle);
+            div.innerHTML = 
+                <h3>+ex.name+ <span style="font-size: 0.8rem; color: var(--accent-blue);">(Custom)</span></h3>
+                <p>Target: +ex.muscle+</p>
+            ;
+            grid.appendChild(div);
+        });
+    },
     filterGrid: (muscle) => {
         const cards = document.querySelectorAll('.exercise-card');
         
@@ -69,6 +89,7 @@ const ExerciseLibrary = {
         
         // Reset search bar when using filter buttons
         ExerciseLibrary.initCustomForm();
+        ExerciseLibrary.renderCustomExercises();
         const searchInput = document.getElementById('exercise-search');
         if (searchInput) searchInput.value = '';
     },
@@ -94,3 +115,4 @@ const ExerciseLibrary = {
 
 // Initialize when the page loads
 document.addEventListener('DOMContentLoaded', ExerciseLibrary.init);
+
