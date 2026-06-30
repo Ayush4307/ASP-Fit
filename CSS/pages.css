@@ -1,3 +1,336 @@
-index.html{
-    color: #333;
+.dashboard-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.dashboard-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.daily-quote-section {
+    margin-bottom: 2rem;
+}
+
+.daily-quote-section blockquote {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--accent-blue);
+    border-left: 4px solid var(--accent-blue);
+    padding: 1rem 1.5rem;
+    background-color: rgba(37, 99, 235, 0.05);
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    margin: 0;
+}
+
+.daily-task-section {
+    margin-bottom: 2rem;
+}
+
+.daily-task-section h2,
+.recent-activity-section h2 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.task-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.task-card input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--accent-blue);
+    cursor: pointer;
+}
+
+.task-card label {
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.activity-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.activity-card span {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+/* ================================
+   TRACKER - tracker.html
+================================ */
+.tracker-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tracker-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+}
+
+.tracker-header p {
+    color: var(--text-secondary);
+}
+
+.tracker-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.set-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.set-row .set-number {
+    min-width: 45px;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.set-row input[type="number"] {
+    width: 85px !important;
+    text-align: center;
+}
+
+.set-row input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent-blue);
+    cursor: pointer;
+}
+
+.exercise-block {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.exercise-block h4 {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+/* ================================
+   EXERCISE LIBRARY - exercises.html
+================================ */
+.exercises-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.exercises-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+}
+
+.exercises-header p {
+    color: var(--text-secondary);
+}
+
+.filter-bar {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.filter-btn {
+    padding: 0.5rem 1.25rem;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.875rem;
+}
+
+.filter-btn:hover {
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
+}
+
+.filter-btn.active {
+    background-color: var(--accent-blue);
+    color: #FFFFFF;
+    border-color: var(--accent-blue);
+}
+
+.search-bar {
+    width: 100%;
+    max-width: 350px;
+    margin-bottom: 1.5rem;
+}
+
+.exercise-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.exercise-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.exercise-card p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* ================================
+   PROGRESS - progress.html
+================================ */
+.progress-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.progress-header h1 {
+    font-size: 2rem;
+}
+
+.chart-container {
+    position: relative;
+    height: 300px;
+    margin-bottom: 2rem;
+}
+
+.pr-list {
+    list-style: none;
+    padding: 0;
+}
+
+/* ================================
+   KNOWLEDGE HUB - learn.html
+================================ */
+.learn-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.learn-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+}
+
+.learn-header p {
+    color: var(--text-secondary);
+}
+
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.article-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.article-card .article-category {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+}
+
+.article-card p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.btn-read-more {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+}
+
+/* ================================
+   PROFILE - profile.html
+================================ */
+.profile-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.profile-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+}
+
+.profile-header p {
+    color: var(--text-secondary);
+}
+
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: var(--accent-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 1.5rem;
+}
+
+.goals-form {
+    max-width: 500px;
+}
+
+/* ================================
+   MOBILE RESPONSIVE for pages.css
+================================ */
+@media (max-width: 768px) {
+    .exercise-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .articles-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-bar {
+        gap: 0.35rem;
+    }
+
+    .dashboard-header h1,
+    .tracker-header h1,
+    .exercises-header h1,
+    .progress-header h1,
+    .learn-header h1,
+    .profile-header h1 {
+        font-size: 1.5rem;
+    }
 }
