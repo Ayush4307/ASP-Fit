@@ -1,4 +1,4 @@
-/* css/main.css */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 /* --- CSS Variables (Design Tokens) --- */
@@ -40,7 +40,7 @@ body {
     min-height: 100vh;
 }
 
-/* --- Global Typography --- */
+
 h1, h2, h3, h4 {
     font-weight: 600;
     letter-spacing: -0.02em;
