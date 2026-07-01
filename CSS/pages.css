@@ -231,6 +231,17 @@
     color: var(--text-secondary);
 }
 
+.muscle-tag {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.2rem 0.75rem;
+    background-color: rgba(37, 99, 235, 0.1);
+    color: var(--accent-blue);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
 /* ================================
    PROGRESS - progress.html
 ================================ */
