@@ -36,12 +36,14 @@
                 <h1>Workout Tracker</h1>
                 <p>Log your session and beat your records.</p>
             </div>
-                        <div id="stopwatch-section" style="margin-top: 15px; padding: 10px; border: 1px solid var(--border-color); border-radius: 8px;">
-                <h3 style="margin-bottom: 5px;">Stopwatch</h3>
-                <h2 id="stopwatch-display" style="font-family: monospace; font-size: 2rem; margin-bottom: 10px;">00:00:00</h2>
-                <button type="button" id="sw-start-btn" class="btn-primary" style="margin-right: 5px;">Start</button>
-                <button type="button" id="sw-stop-btn" class="btn-secondary" style="margin-right: 5px;">Stop</button>
-                <button type="button" id="sw-reset-btn" class="btn-secondary">Reset</button>
+                        <div id="stopwatch-section" class="stopwatch-section">
+                <h3 class="stopwatch-title">Stopwatch</h3>
+                <h2 id="stopwatch-display" class="stopwatch-display">00:00:00</h2>
+                <div class="stopwatch-controls">
+                    <button type="button" id="sw-start-btn" class="btn-primary">Start</button>
+                    <button type="button" id="sw-stop-btn" class="btn-secondary">Stop</button>
+                    <button type="button" id="sw-reset-btn" class="btn-secondary">Reset</button>
+                </div>
             </div>
             <!-- The Bright Blue Primary Button -->
             <button id="start-timer-btn" class="btn-primary">â± Start Rest Timer</button>
