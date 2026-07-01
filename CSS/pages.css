@@ -93,6 +93,38 @@
     margin-bottom: 1.5rem;
 }
 
+/* Date + Split side by side */
+.session-metadata {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.session-metadata .input-group {
+    flex: 1;
+    min-width: 180px;
+    margin-bottom: 0;
+}
+
+/* Exercises heading */
+#exercise-list-container h3 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+/* Action buttons row at the bottom of the form */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
 .stopwatch-section {
     margin-top: 1rem;
     padding: 1rem 1.25rem;
