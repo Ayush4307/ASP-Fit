@@ -508,7 +508,73 @@
 }
 
 .goals-form {
-    max-width: 500px;
+    max-width: 100%;
+}
+
+/* 2-column grid: Goals on left, Achievements on right */
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+/* Badges grid inside the achievements card */
+.badges-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0.5rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    border: 2px solid var(--border-color);
+    transition: all 0.2s ease;
+}
+
+.badge p {
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    color: var(--text-secondary);
+}
+
+.badge-icon {
+    font-size: 1.75rem;
+    line-height: 1;
+}
+
+/* Earned badge — golden glow */
+.badge.earned {
+    border-color: #F59E0B;
+    background-color: rgba(245, 158, 11, 0.08);
+}
+
+.badge.earned p {
+    color: var(--text-primary);
+}
+
+/* Locked badge — faded out */
+.badge.locked {
+    opacity: 0.4;
+    filter: grayscale(1);
+}
+
+/* Mobile: stack to single column */
+@media (max-width: 768px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+    .badges-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 /* ================================
