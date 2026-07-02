@@ -33,7 +33,7 @@
         <!-- Welcome Header -->
         <header class="dashboard-header">
             <h1>Welcome back, Ayush</h1>
-            <p class="streak-badge">🔥 4 Day Streak</p>
+            <p class="streak-badge" id="streak-badge">🔥 4 Day Streak</p>
         </header>
 
         <!-- Daily Motivation Section -->
@@ -52,12 +52,11 @@
             </div>
         </section>
 
-        <!-- Recent Activity Placeholder -->
+        <!-- Recent Workouts (populated dynamically by app.js) -->
         <section class="recent-activity-section">
             <h2>Recent Workouts</h2>
-            <div class="activity-card">
-                <p><strong>Push Day (Hypertrophy)</strong></p>
-                <span>Yesterday &bull; 1h 15m</span>
+            <div id="recent-workouts-list">
+                <!-- JS will render real workouts here -->
             </div>
         </section>
 

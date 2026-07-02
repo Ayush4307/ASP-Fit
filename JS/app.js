@@ -37,7 +37,7 @@ const ThemeManager = {
 };
 window.toggleTheme = ThemeManager.toggle;
 
-// --- 3. Dashboard Logic (Daily Quote & Task) ---
+// --- 3. Dashboard Logic (Daily Quote, Task & Dynamic Data) ---
 const Dashboard = {
     quotes: [
         "The only bad workout is the one that didn't happen.",
@@ -55,18 +55,88 @@ const Dashboard = {
     ],
 
     init: () => {
+        Dashboard.renderQuoteAndTask();
+        Dashboard.renderRecentWorkouts();
+        Dashboard.renderStreak();
+    },
+
+    renderQuoteAndTask: () => {
         const quoteEl = document.getElementById('daily-quote');
         const taskEl = document.getElementById('daily-task-text');
+        if (!quoteEl || !taskEl) return;
 
-        if (quoteEl && taskEl) {
-            const today = new Date();
-            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+        const today = new Date();
+        const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+        quoteEl.innerText = `"${Dashboard.quotes[dayOfYear % Dashboard.quotes.length]}"`;
+        taskEl.innerText = Dashboard.tasks[dayOfYear % Dashboard.tasks.length];
+    },
 
-            const randomQuote = Dashboard.quotes[dayOfYear % Dashboard.quotes.length];
-            const randomTask = Dashboard.tasks[dayOfYear % Dashboard.tasks.length];
+    renderRecentWorkouts: () => {
+        const container = document.getElementById('recent-workouts-list');
+        if (!container) return;
 
-            quoteEl.innerText = `"${randomQuote}"`;
-            taskEl.innerText = randomTask;
+        const workouts = Storage.get('workouts') || [];
+
+        if (workouts.length === 0) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <p>No workouts logged yet.</p>
+                    <a href="tracker.html" class="btn-primary" style="display:inline-block; margin-top:0.75rem; text-decoration:none;">Log Your First Workout →</a>
+                </div>`;
+            return;
+        }
+
+        // Show last 3 workouts (most recent first)
+        const recent = [...workouts].reverse().slice(0, 3);
+        container.innerHTML = recent.map(w => {
+            const totalSets = w.exercises.reduce((sum, ex) => sum + ex.sets.length, 0);
+            return `
+                <div class="activity-card card">
+                    <div>
+                        <strong>${w.split} Day</strong>
+                        <span style="display:block; color:var(--text-secondary); font-size:0.875rem; margin-top:2px;">
+                            ${w.exercises.length} exercise${w.exercises.length !== 1 ? 's' : ''} &bull; ${totalSets} sets
+                        </span>
+                    </div>
+                    <span style="font-size:0.8rem; color:var(--text-secondary);">${w.date}</span>
+                </div>`;
+        }).join('');
+    },
+
+    calculateStreak: () => {
+        const workouts = Storage.get('workouts') || [];
+        if (workouts.length === 0) return 0;
+
+        // Get unique workout dates sorted descending
+        const dates = [...new Set(workouts.map(w => w.date))].sort().reverse();
+        let streak = 0;
+        let checkDate = new Date();
+        checkDate.setHours(0, 0, 0, 0);
+
+        for (const dateStr of dates) {
+            const workoutDate = new Date(dateStr);
+            workoutDate.setHours(0, 0, 0, 0);
+            const diffDays = Math.round((checkDate - workoutDate) / (1000 * 60 * 60 * 24));
+
+            if (diffDays === 0 || diffDays === 1) {
+                streak++;
+                checkDate = workoutDate;
+            } else {
+                break;
+            }
+        }
+        return streak;
+    },
+
+    renderStreak: () => {
+        const streakEl = document.getElementById('streak-badge');
+        if (!streakEl) return;
+        const streak = Dashboard.calculateStreak();
+        if (streak > 0) {
+            streakEl.innerText = `🔥 ${streak} Day Streak`;
+            streakEl.style.display = 'inline-block';
+        } else {
+            streakEl.innerText = `💪 Start Your Streak Today!`;
         }
     }
 };
