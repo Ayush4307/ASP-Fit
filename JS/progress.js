@@ -2,118 +2,161 @@
 
 const Progress = {
     init: () => {
-        // Only run if on the progress page
-        const canvas = document.getElementById('volumeChart');
-        if (!canvas) return;
-
+        if (!document.getElementById('volumeChart')) return;
+        Progress.renderSummaryStats();
         Progress.renderChart();
+        Progress.renderHeatmap();
         Progress.renderPRs();
     },
 
-    renderChart: () => {
-        const ctx = document.getElementById('volumeChart').getContext('2d');
+    // ---- SUMMARY STATS ----
+    renderSummaryStats: () => {
         const workouts = Storage.get('workouts') || [];
-        
-        // Calculate total volume (weight x reps) for each date
-        const volumeByDate = {};
-        
-        workouts.forEach(workout => {
-            let sessionVolume = 0;
-            workout.exercises.forEach(ex => {
-                ex.sets.forEach(set => {
-                    sessionVolume += (parseFloat(set.weight) * parseInt(set.reps));
-                });
-            });
-            
-            if (volumeByDate[workout.date]) {
-                volumeByDate[workout.date] += sessionVolume;
-            } else {
-                volumeByDate[workout.date] = sessionVolume;
-            }
-        });
+        const prs = Storage.get('prs') || {};
 
-        const labels = Object.keys(volumeByDate).sort(); // X-axis: Dates
-        const dataPoints = labels.map(date => volumeByDate[date]); // Y-axis: Volume
-
-        if (labels.length === 0) {
-            labels.push("No Data");
-            dataPoints.push(0);
-        }
-
-        // Draw the Chart.js graph
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Total Volume (kg)',
-                    data: dataPoints,
-                    backgroundColor: '#2563EB', // Our bright blue accent!
-                    borderRadius: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: { y: { beginAtZero: true } },
-                plugins: { legend: { display: false } } // Hide legend for a cleaner look
-            }
-        });
-    },
-
-    renderPRs: () => {
-        const prList = document.getElementById('pr-list');
-        if (!prList) return;
-
-        const workouts = Storage.get('workouts') || [];
-        const prs = {}; // Stores the max weight for each exercise
-
-        workouts.forEach(workout => {
-            workout.exercises.forEach(ex => {
-                const name = ex.name;
-                ex.sets.forEach(set => {
-                    const weight = parseFloat(set.weight);
-                    const reps = parseInt(set.reps);
-                    
-                    // Update if we haven't seen this exercise yet, or if the weight is higher
-                    if (!prs[name] || weight > prs[name].weight) {
-                        prs[name] = { weight, reps, date: workout.date };
+        let totalVolume = 0;
+        workouts.forEach(w => {
+            (w.exercises || []).forEach(ex => {
+                (ex.sets || []).forEach(s => {
+                    if (s.done !== false) {
+                        totalVolume += (parseFloat(s.kg) || parseFloat(s.weight) || 0) * (parseInt(s.reps) || 0);
                     }
                 });
             });
         });
 
-        // Clear the hardcoded HTML examples
-        prList.innerHTML = '';
+        const streak = Progress.calcStreak(workouts);
 
-        const exerciseNames = Object.keys(prs);
-        
-        if (exerciseNames.length === 0) {
-            prList.innerHTML = '<p style="color: var(--text-secondary);">Log a workout to see your PRs here!</p>';
+        const set = (id, val) => { const el = document.getElementById(id); if (el) el.innerText = val; };
+        set('p-total', workouts.length);
+        set('p-volume', totalVolume >= 1000 ? (totalVolume / 1000).toFixed(1) + 'k' : totalVolume);
+        set('p-streak', streak);
+        set('p-prs', Object.keys(prs).length);
+    },
+
+    calcStreak: (workouts) => {
+        if (!workouts.length) return 0;
+        const dates = [...new Set(workouts.map(w => w.date))].sort().reverse();
+        let streak = 0, check = new Date(); check.setHours(0,0,0,0);
+        for (const d of dates) {
+            const wd = new Date(d); wd.setHours(0,0,0,0);
+            const diff = Math.round((check - wd) / 86400000);
+            if (diff === 0 || diff === 1) { streak++; check = wd; } else break;
+        }
+        return streak;
+    },
+
+    // ---- VOLUME CHART ----
+    renderChart: () => {
+        const ctx = document.getElementById('volumeChart').getContext('2d');
+        const workouts = Storage.get('workouts') || [];
+
+        const volumeByDate = {};
+        workouts.forEach(w => {
+            let vol = 0;
+            (w.exercises || []).forEach(ex => {
+                (ex.sets || []).forEach(s => {
+                    vol += (parseFloat(s.kg) || parseFloat(s.weight) || 0) * (parseInt(s.reps) || 0);
+                });
+            });
+            volumeByDate[w.date] = (volumeByDate[w.date] || 0) + vol;
+        });
+
+        const labels = Object.keys(volumeByDate).sort().slice(-10);
+        const data = labels.map(d => volumeByDate[d]);
+
+        if (labels.length === 0) {
+            labels.push('No Data Yet');
+            data.push(0);
+        }
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels,
+                datasets: [{
+                    label: 'Volume (kg)',
+                    data,
+                    backgroundColor: 'rgba(37,99,235,0.8)',
+                    borderRadius: 6,
+                    borderSkipped: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(0,0,0,0.05)' },
+                        ticks: { color: '#64748B' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#64748B', maxRotation: 45 }
+                    }
+                }
+            }
+        });
+    },
+
+    // ---- CONSISTENCY HEATMAP ----
+    renderHeatmap: () => {
+        const container = document.getElementById('consistency-heatmap');
+        if (!container) return;
+
+        const workouts = Storage.get('workouts') || [];
+        const workoutDates = new Set(workouts.map(w => w.date));
+
+        // Build last 12 weeks (84 days) grid
+        const cells = [];
+        const today = new Date();
+        today.setHours(0,0,0,0);
+
+        for (let i = 83; i >= 0; i--) {
+            const d = new Date(today);
+            d.setDate(today.getDate() - i);
+            const dateStr = d.toISOString().split('T')[0];
+            const hasWorkout = workoutDates.has(dateStr);
+            cells.push({ date: dateStr, active: hasWorkout });
+        }
+
+        container.innerHTML = cells.map(c => {
+            const level = c.active ? 'level-3' : 'level-0';
+            return `<div class="heatmap-cell ${level}" title="${c.date}"></div>`;
+        }).join('');
+    },
+
+    // ---- PERSONAL RECORDS ----
+    renderPRs: () => {
+        const prList = document.getElementById('pr-list');
+        if (!prList) return;
+
+        const prs = Storage.get('prs') || {};
+        const entries = Object.entries(prs);
+
+        if (entries.length === 0) {
+            prList.innerHTML = `
+                <div class="empty-state">
+                    <p>No PRs yet. Log a workout to set your first record!</p>
+                    <a href="tracker.html" class="btn-primary" style="display:inline-block;margin-top:0.75rem;text-decoration:none;">Start Logging →</a>
+                </div>`;
             return;
         }
 
-        // Generate the HTML for the real PRs
-        exerciseNames.forEach(name => {
-            const pr = prs[name];
-            const li = document.createElement('li');
-            
-            // Inline styles to match the flex layout without adding more CSS
-            li.style.display = "flex";
-            li.style.justifyContent = "space-between";
-            li.style.alignItems = "center";
-            li.style.padding = "1rem 0";
-            li.style.borderBottom = "1px solid var(--border-color)";
-            
-            li.innerHTML = `
+        // Sort by weight descending
+        entries.sort((a, b) => b[1] - a[1]);
+
+        prList.innerHTML = entries.map(([name, weight]) => `
+            <li class="pr-item">
                 <div class="pr-info">
                     <strong>${name}</strong>
-                    <span style="display:block; color:var(--text-secondary); margin-top:4px;">${pr.weight}kg × ${pr.reps} reps</span>
+                    <span>${weight} kg</span>
                 </div>
-                <span class="pr-date" style="font-size:0.875rem; color:var(--text-secondary);">${pr.date}</span>
-            `;
-            prList.appendChild(li);
-        });
+                <span class="pr-badge">🏆 PR</span>
+            </li>
+        `).join('');
     }
 };
 

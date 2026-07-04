@@ -494,46 +494,103 @@
    PROGRESS - progress.html
 ================================ */
 .progress-header {
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.75rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.progress-header h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+.progress-header p { color: var(--text-secondary); }
+
+/* 4 mini stats across the top */
+.progress-stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
 }
 
-.progress-header h1 {
-    font-size: 2rem;
-    margin-bottom: 0.25rem;
+.progress-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.25rem !important;
+    text-align: center;
 }
 
-.progress-header p {
+.progress-stat-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--accent-blue);
+    line-height: 1;
+}
+
+.progress-stat-label {
+    font-size: 0.75rem;
     color: var(--text-secondary);
+    font-weight: 500;
+    margin-top: 0.35rem;
 }
 
-/* 2-column grid: Chart spans full width, then heatmap and PR side by side */
+/* Analytics grid */
 .analytics-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
     gap: 1.5rem;
 }
 
 .chart-section {
-    grid-column: 1 / -1; /* Full width */
+    grid-column: 1 / -1;
 }
 
 .chart-container {
     position: relative;
-    height: 280px;
+    height: 260px;
     margin-top: 1rem;
 }
 
-.heatmap-section {
-    grid-column: 1;
+.progress-sub {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
 }
 
-.pr-section {
-    grid-column: 2;
+/* Heatmap */
+.heatmap-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 3px;
+    margin-bottom: 0.75rem;
 }
 
+.heatmap-cell {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 2px;
+}
+
+.heatmap-cell.level-0 { background-color: #E2E8F0; }
+.heatmap-cell.level-1 { background-color: #BFDBFE; }
+.heatmap-cell.level-2 { background-color: #60A5FA; }
+.heatmap-cell.level-3 { background-color: var(--accent-blue); }
+
+.heatmap-legend {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.heatmap-legend .heatmap-cell {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+}
+
+/* PR List */
 .pr-list {
     list-style: none;
     padding: 0;
@@ -548,49 +605,31 @@
     border-bottom: 1px solid var(--border-color);
 }
 
-.pr-item:last-child {
-    border-bottom: none;
-}
+.pr-item:last-child { border-bottom: none; }
 
-.pr-info strong {
-    display: block;
-    margin-bottom: 2px;
-}
-
+.pr-info strong { display: block; margin-bottom: 2px; }
 .pr-info span {
     font-size: 0.875rem;
     color: var(--text-secondary);
 }
 
-.pr-date {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
+.pr-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: rgba(245, 158, 11, 0.1);
+    color: #D97706;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
 }
 
-.heatmap-grid {
-    margin-top: 1rem;
-    min-height: 80px;
-    background: rgba(37, 99, 235, 0.05);
-    border-radius: 8px;
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-secondary);
-    font-size: 0.875rem;
-}
-
-/* On mobile, stack to single column */
 @media (max-width: 768px) {
-    .analytics-grid {
-        grid-template-columns: 1fr;
-    }
-    .chart-section,
-    .heatmap-section,
-    .pr-section {
-        grid-column: 1;
-    }
+    .progress-stats-row { grid-template-columns: repeat(2, 1fr); }
+    .analytics-grid { grid-template-columns: 1fr; }
+    .chart-section { grid-column: 1; }
+    .heatmap-grid { grid-template-columns: repeat(7, 1fr); }
 }
+
+
 
 /* ================================
    KNOWLEDGE HUB - learn.html
