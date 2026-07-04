@@ -1,20 +1,74 @@
+/* ================================
+   DASHBOARD - index.html
+================================ */
 .dashboard-header {
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.75rem;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .dashboard-header h1 {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.75rem;
+    margin-bottom: 0.25rem;
 }
 
+.streak-badge {
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent-blue);
+    margin: 0;
+}
+
+/* 4 stats cards in a row */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem !important;
+}
+
+.stat-icon {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+    font-weight: 500;
+}
+
+/* Quote banner */
 .daily-quote-section {
-    margin-bottom: 2rem;
+    margin-bottom: 1.75rem;
 }
 
 .daily-quote-section blockquote {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-style: italic;
     color: var(--accent-blue);
     border-left: 4px solid var(--accent-blue);
@@ -24,23 +78,29 @@
     margin: 0;
 }
 
-.daily-task-section {
-    margin-bottom: 2rem;
+/* 2-column grid below quote */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 1.5rem;
 }
 
 .daily-task-section h2,
 .recent-activity-section h2 {
-    font-size: 1.1rem;
+    font-size: 0.8rem;
     margin-bottom: 1rem;
     color: var(--text-secondary);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
+    font-weight: 600;
 }
 
 .task-card {
     display: flex;
     align-items: center;
     gap: 1rem;
+    padding: 1rem 1.25rem !important;
+    margin-bottom: 1rem;
 }
 
 .task-card input[type="checkbox"] {
@@ -48,6 +108,7 @@
     height: 20px;
     accent-color: var(--accent-blue);
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 .task-card label {
@@ -56,15 +117,23 @@
     cursor: pointer;
 }
 
+.quick-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
 .activity-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 0.75rem;
+    padding: 1rem 1.25rem !important;
 }
 
-.activity-card span {
-    color: var(--text-secondary);
-    font-size: 0.875rem;
+.activity-card:last-child {
+    margin-bottom: 0;
 }
 
 .empty-state {
@@ -74,6 +143,17 @@
     border: 2px dashed var(--border-color);
     border-radius: var(--border-radius);
 }
+
+/* Responsive */
+@media (max-width: 900px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .dashboard-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+
 
 /* ================================
    TRACKER - tracker.html
