@@ -1,46 +1,58 @@
-﻿// JS/tracker.js
+// JS/tracker.js
 
 const Tracker = {
+
+    restDuration: 60,
+    restInterval: null,
+    restTimeLeft: 60,
+    stopwatchTime: 0,
+    stopwatchInterval: null,
+
     init: () => {
-        // Only run this script if we are on the tracker page
         const form = document.getElementById('workout-form');
         if (!form) return;
 
-        // 1. Set today's date automatically in the input field
+        // Set today's date
         document.getElementById('workout-date').valueAsDate = new Date();
 
-        // 2. Set up the '+ Add Exercise' button
-        document.getElementById('add-exercise-btn').addEventListener('click', Tracker.addExerciseBlock);
-
-        // 3. Set up the 'Finish Workout' submit event
-        form.addEventListener('submit', Tracker.saveWorkout);
-
-        // 4. Set up the Rest Timer
-        document.getElementById('start-timer-btn').addEventListener('click', Tracker.startTimer);
-        Tracker.initStopwatch();
-    },
-
-        // Stopwatch Logic
-    stopwatchTime: 0,
-    stopwatchInterval: null,
-    
-    initStopwatch: () => {
+        // Stopwatch buttons
         document.getElementById('sw-start-btn').addEventListener('click', Tracker.startStopwatch);
         document.getElementById('sw-stop-btn').addEventListener('click', Tracker.stopStopwatch);
         document.getElementById('sw-reset-btn').addEventListener('click', Tracker.resetStopwatch);
+
+        // Rest timer duration selector
+        document.querySelectorAll('.rest-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.rest-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                Tracker.restDuration = parseInt(btn.dataset.secs);
+                Tracker.restTimeLeft = Tracker.restDuration;
+                Tracker.updateRestDisplay();
+            });
+        });
+
+        // Rest timer start
+        document.getElementById('start-timer-btn').addEventListener('click', Tracker.startRestTimer);
+
+        // Add exercise button
+        document.getElementById('add-exercise-btn').addEventListener('click', Tracker.addExerciseBlock);
+
+        // Form submit
+        form.addEventListener('submit', Tracker.saveWorkout);
+
+        // Add a default exercise block on load
+        Tracker.addExerciseBlock();
     },
-    
+
+    // ---- STOPWATCH ----
     updateStopwatchDisplay: () => {
-        const display = document.getElementById('stopwatch-display');
-        const hrs = Math.floor(Tracker.stopwatchTime / 3600);
-        const mins = Math.floor((Tracker.stopwatchTime % 3600) / 60);
-        const secs = Tracker.stopwatchTime % 60;
-        display.innerText = 
-            String(hrs).padStart(2, '0') + ':' + 
-            String(mins).padStart(2, '0') + ':' + 
-            String(secs).padStart(2, '0');
+        const h = Math.floor(Tracker.stopwatchTime / 3600);
+        const m = Math.floor((Tracker.stopwatchTime % 3600) / 60);
+        const s = Tracker.stopwatchTime % 60;
+        document.getElementById('stopwatch-display').innerText =
+            `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
     },
-        startStopwatch: () => {
+    startStopwatch: () => {
         if (!Tracker.stopwatchInterval) {
             Tracker.stopwatchInterval = setInterval(() => {
                 Tracker.stopwatchTime++;
@@ -57,140 +69,172 @@ const Tracker = {
         Tracker.stopwatchTime = 0;
         Tracker.updateStopwatchDisplay();
     },
+
+    // ---- REST TIMER ----
+    updateRestDisplay: () => {
+        const m = Math.floor(Tracker.restTimeLeft / 60);
+        const s = Tracker.restTimeLeft % 60;
+        const el = document.getElementById('rest-display');
+        if (el) el.innerText = `${m}:${String(s).padStart(2,'0')}`;
+    },
+    startRestTimer: () => {
+        if (Tracker.restInterval) {
+            clearInterval(Tracker.restInterval);
+            Tracker.restInterval = null;
+        }
+        Tracker.restTimeLeft = Tracker.restDuration;
+        const btn = document.getElementById('start-timer-btn');
+        btn.innerText = 'Stop Rest';
+        btn.classList.replace('btn-primary', 'btn-secondary');
+
+        Tracker.restInterval = setInterval(() => {
+            Tracker.restTimeLeft--;
+            Tracker.updateRestDisplay();
+            if (Tracker.restTimeLeft <= 0) {
+                clearInterval(Tracker.restInterval);
+                Tracker.restInterval = null;
+                Tracker.restTimeLeft = Tracker.restDuration;
+                Tracker.updateRestDisplay();
+                btn.innerText = 'Start Rest';
+                btn.classList.replace('btn-secondary', 'btn-primary');
+                Tracker.beep();
+                Tracker.showToast('⏱ Rest time over! Get back to it! 💪');
+            }
+        }, 1000);
+
+        // Toggle to stop on second click
+        btn.onclick = () => {
+            if (Tracker.restInterval) {
+                clearInterval(Tracker.restInterval);
+                Tracker.restInterval = null;
+                Tracker.restTimeLeft = Tracker.restDuration;
+                Tracker.updateRestDisplay();
+                btn.innerText = 'Start Rest';
+                btn.classList.replace('btn-secondary', 'btn-primary');
+                btn.onclick = Tracker.startRestTimer;
+            }
+        };
+    },
+    beep: () => {
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(880, ctx.currentTime);
+            osc.connect(ctx.destination);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.4);
+        } catch(e) {}
+    },
+
+    // ---- EXERCISE BLOCKS ----
     addExerciseBlock: () => {
         const container = document.getElementById('exercise-list-container');
-        
-        // Create a new exercise block
+        const blockId = `block-${Date.now()}`;
+
         const block = document.createElement('div');
         block.className = 'exercise-block';
-        block.style.marginTop = '20px';
-        block.style.paddingTop = '20px';
-        block.style.borderTop = '1px solid var(--border-color)';
-        
-        // HTML structure for the new block
+        block.id = blockId;
         block.innerHTML = `
-            <input type="text" placeholder="Exercise Name (e.g. Squat)" class="exercise-name-input" required style="width: 100%; margin-bottom: 10px; padding: 0.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
-            <div class="set-row">
-                <span class="set-number" style="margin-right: 10px; font-weight: 500;">Set 1</span>
-                <input type="number" placeholder="kg" class="weight-input" required style="width: 80px; margin-right: 5px;">
-                <input type="number" placeholder="reps" class="reps-input" required style="width: 80px; margin-right: 5px;">
-                <input type="checkbox" class="done-check" style="transform: scale(1.2);">
+            <div class="exercise-block-header">
+                <input type="text" placeholder="Exercise name (e.g. Bench Press)" class="exercise-name-input" required>
+                <button type="button" class="remove-block-btn" onclick="document.getElementById('${blockId}').remove()">✕</button>
             </div>
-            <button type="button" class="btn-secondary add-set-btn" style="margin-top: 15px; font-size: 0.8rem; padding: 0.5rem 1rem;">+ Add Set</button>
+            <div class="sets-table-header">
+                <span>Set</span>
+                <span>kg</span>
+                <span>Reps</span>
+                <span>Done</span>
+            </div>
+            <div class="sets-container"></div>
+            <button type="button" class="btn-add-set">+ Add Set</button>
         `;
 
-        // Add event listener to the "+ Add Set" button inside this new block
-        const addSetBtn = block.querySelector('.add-set-btn');
+        // Wire up + Add Set
+        const setsContainer = block.querySelector('.sets-container');
+        const addSetBtn = block.querySelector('.btn-add-set');
         addSetBtn.addEventListener('click', () => {
-            const setRows = block.querySelectorAll('.set-row');
-            const newSetNum = setRows.length + 1;
-            
-            const newSet = document.createElement('div');
-            newSet.className = 'set-row';
-            newSet.style.marginTop = '10px';
-            newSet.innerHTML = `
-                <span class="set-number" style="margin-right: 10px; font-weight: 500;">Set ${newSetNum}</span>
-                <input type="number" placeholder="kg" class="weight-input" required style="width: 80px; margin-right: 5px;">
-                <input type="number" placeholder="reps" class="reps-input" required style="width: 80px; margin-right: 5px;">
-                <input type="checkbox" class="done-check" style="transform: scale(1.2);">
+            const setNum = setsContainer.querySelectorAll('.set-row').length + 1;
+            const row = document.createElement('div');
+            row.className = 'set-row';
+            row.innerHTML = `
+                <span class="set-number">Set ${setNum}</span>
+                <input type="number" placeholder="0" class="weight-input" min="0" step="0.5">
+                <input type="number" placeholder="0" class="reps-input" min="0">
+                <input type="checkbox" class="done-check">
             `;
-            // Insert it right before the "Add Set" button
-            block.insertBefore(newSet, addSetBtn);
+            setsContainer.appendChild(row);
         });
 
+        // Add first set automatically
+        addSetBtn.click();
         container.appendChild(block);
     },
 
-    startTimer: () => {
-        const btn = document.getElementById('start-timer-btn');
-        let timeLeft = 60; // 60 seconds rest timer
-        
-        // Prevent clicking multiple times
-        if (btn.disabled) return;
-        
-        btn.disabled = true;
-        btn.style.backgroundColor = '#10B981'; // Turn green
-        
-        const timerInterval = setInterval(() => {
-            btn.innerText = `â± Rest: ${timeLeft}s`;
-            timeLeft--;
-
-            if (timeLeft < 0) {
-                clearInterval(timerInterval);
-                btn.innerText = "â± Start Rest Timer";
-                btn.disabled = false;
-                btn.style.backgroundColor = "var(--accent-blue)";
-                
-                // Play a simple beep sound
-                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const oscillator = audioCtx.createOscillator();
-                oscillator.type = 'sine';
-                oscillator.frequency.setValueAtTime(800, audioCtx.currentTime);
-                oscillator.connect(audioCtx.destination);
-                oscillator.start();
-                oscillator.stop(audioCtx.currentTime + 0.5);
-                
-                alert("Rest time is up! Get back to work! ðŸ’ª");
-            }
-        }, 1000);
-    },
-
+    // ---- SAVE WORKOUT ----
     saveWorkout: (e) => {
-        e.preventDefault(); // Stop the page from reloading
-        
+        e.preventDefault();
         const date = document.getElementById('workout-date').value;
         const split = document.getElementById('workout-type').value;
-        
-        // Gather all exercises and sets
         const exercises = [];
-        const blocks = document.querySelectorAll('.exercise-block');
-        
-        blocks.forEach(block => {
-            // Check if it's the hardcoded block or a newly added one
+
+        document.querySelectorAll('.exercise-block').forEach(block => {
             const nameInput = block.querySelector('.exercise-name-input');
-            const name = nameInput ? nameInput.value : block.querySelector('h4').innerText;
-            
+            const name = nameInput ? nameInput.value.trim() : '';
+            if (!name) return;
+
             const sets = [];
             block.querySelectorAll('.set-row').forEach(row => {
-                // Only save sets that were marked as "done" (checkbox checked)
-                const isDone = row.querySelector('.done-check').checked;
-                if (isDone) {
-                    sets.push({
-                        weight: row.querySelector('.weight-input').value,
-                        reps: row.querySelector('.reps-input').value
-                    });
-                }
+                const kg = row.querySelector('.weight-input').value;
+                const reps = row.querySelector('.reps-input').value;
+                const done = row.querySelector('.done-check').checked;
+                sets.push({ kg: kg || '0', reps: reps || '0', done });
             });
-            
-            if (sets.length > 0) {
-                exercises.push({ name, sets });
-            }
+
+            if (sets.length > 0) exercises.push({ name, sets });
         });
 
         if (exercises.length === 0) {
-            alert("You didn't complete any sets! Make sure to check the boxes when a set is done.");
+            Tracker.showToast('⚠️ Add at least one exercise!', true);
             return;
         }
 
-        const workoutData = {
+        const workout = {
             id: Date.now(),
-            date: date,
-            split: split,
-            exercises: exercises
+            date,
+            split,
+            exercises
         };
 
-        // Save it using the Storage object from app.js
-        let allWorkouts = Storage.get('workouts') || [];
-        allWorkouts.push(workoutData);
-        Storage.save('workouts', allWorkouts);
+        const all = Storage.get('workouts') || [];
+        all.push(workout);
+        Storage.save('workouts', all);
 
-        alert("Workout saved successfully! ðŸš€");
-        
-        // Redirect to dashboard
-        window.location.href = "index.html";
+        // Update PRs
+        Tracker.updatePRs(exercises);
+
+        Tracker.showToast('✅ Workout saved! Great work! 🔥');
+        setTimeout(() => window.location.href = 'index.html', 1500);
+    },
+
+    updatePRs: (exercises) => {
+        const prs = Storage.get('prs') || {};
+        exercises.forEach(ex => {
+            const bestKg = Math.max(...ex.sets.map(s => parseFloat(s.kg) || 0));
+            if (!prs[ex.name] || bestKg > prs[ex.name]) {
+                prs[ex.name] = bestKg;
+            }
+        });
+        Storage.save('prs', prs);
+    },
+
+    showToast: (msg, isError = false) => {
+        const toast = document.getElementById('toast');
+        if (!toast) return;
+        toast.innerText = msg;
+        toast.className = `toast ${isError ? 'toast-error' : 'toast-success'} show`;
+        setTimeout(() => toast.classList.remove('show'), 3000);
     }
 };
 
-// Initialize when the page loads
 document.addEventListener('DOMContentLoaded', Tracker.init);
-
