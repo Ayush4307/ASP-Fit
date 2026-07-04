@@ -13,9 +13,7 @@
 
     <!-- Top Navigation Bar -->
     <nav class="sidebar">
-        <div class="logo">
-            <h2>ASP Fit</h2>
-        </div>
+        <div class="logo"><h2>ASP Fit</h2></div>
         <ul class="nav-links">
             <li><a href="index.html">Dashboard</a></li>
             <li><a href="tracker.html">Tracker</a></li>
@@ -27,65 +25,43 @@
         <button class="nav-theme-btn" onclick="toggleTheme()">🌙 Theme</button>
     </nav>
 
-    <!-- Main Learn Content -->
     <main class="learn-content" role="main">
-        
+
         <header class="learn-header">
-            <h1>Knowledge Hub</h1>
-            <p>Science-backed articles on training, nutrition, and recovery.</p>
+            <div>
+                <h1>Knowledge Hub</h1>
+                <p>Science-backed articles on training, nutrition, and recovery.</p>
+            </div>
         </header>
 
-        <section class="articles-grid-section">
-            <div class="articles-grid">
-                
-                <!-- Article Card 1 -->
-                <article class="article-card">
-                    <div class="article-image-placeholder"></div>
-                    <div class="article-content">
-                        <span class="article-category">Training</span>
-                        <h3>The Science of Progressive Overload</h3>
-                        <p>Why lifting heavier over time is the only way to grow.</p>
-                        <button class="btn-read-more">Read Article â†’</button>
-                    </div>
-                </article>
+        <!-- Category filter pills -->
+        <div class="filter-bar learn-filter-bar">
+            <button class="filter-btn active" data-cat="All">All</button>
+            <button class="filter-btn" data-cat="Training">🏋️ Training</button>
+            <button class="filter-btn" data-cat="Nutrition">🥗 Nutrition</button>
+            <button class="filter-btn" data-cat="Recovery">😴 Recovery</button>
+            <button class="filter-btn" data-cat="Mindset">🧠 Mindset</button>
+        </div>
 
-                <!-- Article Card 2 -->
-                <article class="article-card">
-                    <div class="article-image-placeholder"></div>
-                    <div class="article-content">
-                        <span class="article-category">Recovery</span>
-                        <h3>Optimizing Sleep for Hypertrophy</h3>
-                        <p>How missing out on sleep destroys your gains.</p>
-                        <button class="btn-read-more">Read Article â†’</button>
-                    </div>
-                </article>
-
-                <!-- Article Card 3 -->
-                <article class="article-card">
-                    <div class="article-image-placeholder"></div>
-                    <div class="article-content">
-                        <span class="article-category">Nutrition</span>
-                        <h3>Protein Timing: Does it Matter?</h3>
-                        <p>The truth about the anabolic window and post-workout meals.</p>
-                        <button class="btn-read-more">Read Article â†’</button>
-                    </div>
-                </article>
-
-            </div>
-        </section>
-
-        <!-- Article Reading Modal (Hidden by default, triggered by JS later) -->
-        <div id="article-modal" class="modal" style="display: none;">
-            <div class="modal-content">
-                <span class="close-modal">&times;</span>
-                <h2 id="modal-title">Article Title</h2>
-                <div id="modal-body">
-                    <!-- JavaScript will inject the full article text here -->
-                </div>
-            </div>
+        <!-- Articles Grid -->
+        <div class="articles-grid" id="articles-grid">
+            <!-- Rendered by learn.js -->
         </div>
 
     </main>
+
+    <!-- Article Reading Modal -->
+    <div id="article-modal" class="modal">
+        <div class="modal-overlay" onclick="Learn.closeModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <span id="modal-category" class="article-category"></span>
+                <button class="modal-close-btn" onclick="Learn.closeModal()">✕</button>
+            </div>
+            <h2 id="modal-title"></h2>
+            <div id="modal-body" class="modal-body"></div>
+        </div>
+    </div>
 
     <script src="JS/app.js"></script>
     <script src="JS/learn.js"></script>
