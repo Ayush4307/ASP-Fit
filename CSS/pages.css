@@ -831,12 +831,8 @@
 }
 
 .profile-header h1 {
-    font-size: 2rem;
-    margin-bottom: 0.25rem;
-}
-
-.profile-header p {
-    color: var(--text-secondary);
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .profile-info-layout {
@@ -846,30 +842,45 @@
 }
 
 .profile-avatar {
-    width: 70px;
-    height: 70px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
-    background-color: var(--accent-blue);
+    background: var(--accent-blue);
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 800;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #FFFFFF;
     flex-shrink: 0;
+    letter-spacing: -0.03em;
+}
+
+.user-details h1 {
+    font-size: 1.4rem;
+    margin-bottom: 0.15rem;
 }
 
 .join-date {
+    font-size: 0.85rem;
     color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin-top: 0.25rem;
+    margin-bottom: 0.35rem;
 }
 
-.goals-form {
-    max-width: 100%;
+.profile-mini-stats {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
 }
 
-/* 2-column grid: Goals on left, Achievements on right */
+.profile-mini-stats .dot {
+    opacity: 0.4;
+}
+
+/* 2-column layout */
 .profile-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -877,11 +888,68 @@
     align-items: start;
 }
 
-/* Badges grid inside the achievements card */
+/* Goals form */
+.goals-section h2,
+.achievements-section h2 {
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.goals-form {
+    max-width: 100%;
+}
+
+.goals-saved-msg {
+    color: #10B981;
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin-top: 0.75rem;
+}
+
+/* Danger zone */
+.danger-zone {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid #FEE2E2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.danger-zone p {
+    font-size: 0.875rem;
+    color: #EF4444;
+    font-weight: 500;
+}
+
+.btn-danger {
+    background: none;
+    border: 1px solid #EF4444;
+    color: #EF4444;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+.btn-danger:hover { background: #FEE2E2; }
+
+/* Achievements */
+.profile-sub {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: -0.75rem;
+    margin-bottom: 1rem;
+}
+
 .badges-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
     margin-top: 1rem;
 }
 
@@ -890,50 +958,62 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 1rem 0.5rem;
+    padding: 1rem 0.5rem 0.75rem;
     border-radius: var(--border-radius);
     text-align: center;
     border: 2px solid var(--border-color);
     transition: all 0.2s ease;
+    gap: 0.25rem;
 }
 
 .badge p {
-    font-size: 0.75rem;
-    font-weight: 600;
-    margin-top: 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 700;
     color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.2;
 }
 
 .badge-icon {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     line-height: 1;
+    margin-bottom: 0.25rem;
 }
 
-/* Earned badge — golden glow */
 .badge.earned {
     border-color: #F59E0B;
-    background-color: rgba(245, 158, 11, 0.08);
+    background: rgba(245, 158, 11, 0.06);
 }
 
 .badge.earned p {
     color: var(--text-primary);
 }
 
-/* Locked badge — faded out */
 .badge.locked {
-    opacity: 0.4;
+    opacity: 0.38;
     filter: grayscale(1);
 }
 
-/* Mobile: stack to single column */
-@media (max-width: 768px) {
-    .profile-grid {
-        grid-template-columns: 1fr;
-    }
-    .badges-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
+.badge-earned-label {
+    font-size: 0.6rem;
+    color: #D97706;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
+
+.badge-locked-label {
+    font-size: 0.6rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+@media (max-width: 768px) {
+    .profile-grid { grid-template-columns: 1fr; }
+    .badges-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
 
 /* ================================
    MOBILE RESPONSIVE for pages.css

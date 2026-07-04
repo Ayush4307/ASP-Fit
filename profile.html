@@ -13,9 +13,7 @@
 
     <!-- Top Navigation Bar -->
     <nav class="sidebar">
-        <div class="logo">
-            <h2>ASP Fit</h2>
-        </div>
+        <div class="logo"><h2>ASP Fit</h2></div>
         <ul class="nav-links">
             <li><a href="index.html">Dashboard</a></li>
             <li><a href="tracker.html">Tracker</a></li>
@@ -27,88 +25,72 @@
         <button class="nav-theme-btn" onclick="toggleTheme()">🌙 Theme</button>
     </nav>
 
-    <!-- Main Profile Content -->
     <main class="profile-content" role="main">
-        
+
         <!-- Profile Header -->
         <header class="profile-header">
             <div class="profile-info-layout">
-                <div class="profile-avatar">AP</div>
+                <div class="profile-avatar" id="profile-avatar">AP</div>
                 <div class="user-details">
-                    <h1>Ayush Singh Pawar</h1>
+                    <h1 id="profile-name">Ayush Singh Pawar</h1>
                     <p class="join-date">Member since June 2026</p>
+                    <div class="profile-mini-stats">
+                        <span id="ph-workouts">0 workouts</span>
+                        <span class="dot">·</span>
+                        <span id="ph-streak">0 day streak</span>
+                        <span class="dot">·</span>
+                        <span id="ph-prs">0 PRs</span>
+                    </div>
                 </div>
             </div>
-            <!-- Export button so you own your data -->
-            <button id="export-data-btn" class="btn-secondary">â¬‡ï¸ Export Data (JSON)</button>
+            <button id="export-data-btn" class="btn-secondary">⬇️ Export Data</button>
         </header>
 
         <div class="profile-grid">
-            
-            <!-- Goals & Settings Form -->
+
+            <!-- Goals & Settings -->
             <section class="goals-section card">
-                <h2>Fitness Goals</h2>
+                <h2>⚙️ Fitness Goals</h2>
                 <form id="goals-form">
-                    
+                    <div class="input-group">
+                        <label for="profile-name-input">Your Name</label>
+                        <input type="text" id="profile-name-input" placeholder="e.g. Ayush Singh Pawar">
+                    </div>
                     <div class="input-group">
                         <label for="target-weight">Target Bodyweight (kg)</label>
-                        <input type="number" id="target-weight" placeholder="e.g., 75">
+                        <input type="number" id="target-weight" placeholder="e.g. 75">
                     </div>
-
                     <div class="input-group">
-                        <label for="weekly-workouts">Weekly Workout Goal (Days)</label>
-                        <input type="number" id="weekly-workouts" placeholder="e.g., 5" min="1" max="7">
+                        <label for="weekly-workouts">Weekly Workout Goal (days)</label>
+                        <input type="number" id="weekly-workouts" placeholder="e.g. 5" min="1" max="7">
                     </div>
-
                     <div class="input-group">
-                        <label for="current-program">Current Program/Split</label>
+                        <label for="current-program">Current Split</label>
                         <select id="current-program">
                             <option value="PPL">Push / Pull / Legs</option>
                             <option value="Bro Split">Bro Split</option>
                             <option value="Upper / Lower">Upper / Lower</option>
                             <option value="Full Body">Full Body</option>
+                            <option value="5/3/1">5/3/1</option>
                         </select>
                     </div>
-
-                    <button type="submit" class="btn-primary">Save Goals</button>
+                    <button type="submit" class="btn-primary">Save Goals ✓</button>
                 </form>
+                <p id="goals-toast" class="goals-saved-msg" style="display:none;">✅ Goals saved!</p>
+
+                <!-- Danger zone -->
+                <div class="danger-zone">
+                    <p>Reset all data</p>
+                    <button id="reset-data-btn" class="btn-danger">🗑 Clear All Data</button>
+                </div>
             </section>
 
-            <!-- Achievements / Badges Showcase -->
+            <!-- Achievements -->
             <section class="achievements-section card">
-                <h2>Achievements</h2>
-                <div class="badges-grid">
-
-                    <div class="badge earned">
-                        <div class="badge-icon">🔥</div>
-                        <p>First Workout</p>
-                    </div>
-
-                    <div class="badge locked">
-                        <div class="badge-icon">💪</div>
-                        <p>10 Workouts</p>
-                    </div>
-
-                    <div class="badge locked">
-                        <div class="badge-icon">📅</div>
-                        <p>7-Day Streak</p>
-                    </div>
-
-                    <div class="badge locked">
-                        <div class="badge-icon">🏋️</div>
-                        <p>50 Sets Logged</p>
-                    </div>
-
-                    <div class="badge locked">
-                        <div class="badge-icon">⚖️</div>
-                        <p>100kg Lift</p>
-                    </div>
-
-                    <div class="badge locked">
-                        <div class="badge-icon">🥇</div>
-                        <p>Set a PR</p>
-                    </div>
-
+                <h2>🏆 Achievements</h2>
+                <p class="profile-sub">Unlock badges by hitting real milestones</p>
+                <div class="badges-grid" id="badges-grid">
+                    <!-- Rendered by profile.js -->
                 </div>
             </section>
 
