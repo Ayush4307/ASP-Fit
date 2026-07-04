@@ -159,52 +159,199 @@
    TRACKER - tracker.html
 ================================ */
 .tracker-header {
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1.5rem;
 }
+.tracker-header h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+.tracker-header p { color: var(--text-secondary); }
 
-.tracker-header h1 {
-    font-size: 2rem;
-    margin-bottom: 0.25rem;
-}
-
-.tracker-header p {
-    color: var(--text-secondary);
-}
-
-.tracker-controls {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    flex-wrap: wrap;
+/* Two timer cards side by side */
+.timers-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
     margin-bottom: 1.5rem;
 }
 
-/* Date + Split side by side */
+.timer-card {
+    padding: 1.25rem 1.5rem !important;
+}
+
+.timer-label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.stopwatch-display {
+    font-family: 'Courier New', monospace;
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+}
+
+.stopwatch-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Rest duration pill buttons */
+.rest-duration-select {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+}
+
+.rest-btn {
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    background: none;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.rest-btn.active,
+.rest-btn:hover {
+    background: var(--accent-blue);
+    color: #fff;
+    border-color: var(--accent-blue);
+}
+
+/* Session metadata */
 .session-metadata {
     display: flex;
     gap: 1.5rem;
     margin-bottom: 1.5rem;
     flex-wrap: wrap;
 }
-
 .session-metadata .input-group {
     flex: 1;
-    min-width: 180px;
+    min-width: 160px;
     margin-bottom: 0;
 }
 
-/* Exercises heading */
-#exercise-list-container h3 {
-    font-size: 1rem;
+.section-label {
+    font-size: 0.78rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     color: var(--text-secondary);
+    font-weight: 600;
     margin-bottom: 1rem;
 }
 
-/* Action buttons row at the bottom of the form */
+/* Exercise block */
+.exercise-block {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.exercise-block-header {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.exercise-name-input {
+    flex: 1;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.remove-block-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+.remove-block-btn:hover { background: #FEE2E2; border-color: #DC2626; color: #DC2626; }
+
+/* Sets table header */
+.sets-table-header {
+    display: grid;
+    grid-template-columns: 50px 1fr 1fr 40px;
+    gap: 0.5rem;
+    padding: 0 0 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Set row */
+.set-row {
+    display: grid;
+    grid-template-columns: 50px 1fr 1fr 40px;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.4rem 0;
+}
+
+.set-number {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.set-row input[type="number"] {
+    width: 100% !important;
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.set-row input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--accent-blue);
+    cursor: pointer;
+    justify-self: center;
+}
+
+.set-row input[type="checkbox"]:checked ~ * {
+    opacity: 0.5;
+    text-decoration: line-through;
+}
+
+/* Add Set button */
+.btn-add-set {
+    margin-top: 0.75rem;
+    background: none;
+    border: 1px dashed var(--border-color);
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: var(--accent-blue);
+    font-weight: 600;
+    width: 100%;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+.btn-add-set:hover { background: rgba(37,99,235,0.05); border-color: var(--accent-blue); }
+
+/* Form actions */
 .form-actions {
     display: flex;
     gap: 1rem;
@@ -213,73 +360,29 @@
     border-top: 1px solid var(--border-color);
 }
 
-.stopwatch-section {
-    margin-top: 1rem;
-    padding: 1rem 1.25rem;
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
-    background-color: var(--bg-surface);
+/* Toast notification */
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    padding: 0.85rem 1.75rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    z-index: 999;
+    transition: transform 0.3s ease;
+    pointer-events: none;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+.toast-success { background: #10B981; color: #fff; }
+.toast-error { background: #EF4444; color: #fff; }
+
+@media (max-width: 768px) {
+    .timers-row { grid-template-columns: 1fr; }
 }
 
-.stopwatch-title {
-    font-size: 0.875rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-secondary);
-    margin-bottom: 0.5rem;
-}
 
-.stopwatch-display {
-    font-family: 'Courier New', monospace;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--accent-blue);
-    margin-bottom: 1rem;
-    letter-spacing: 0.05em;
-}
-
-.stopwatch-controls {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.set-row {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
-}
-
-.set-row .set-number {
-    min-width: 45px;
-    font-size: 0.875rem;
-    color: var(--text-secondary);
-}
-
-.set-row input[type="number"] {
-    width: 85px !important;
-    text-align: center;
-}
-
-.set-row input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    accent-color: var(--accent-blue);
-    cursor: pointer;
-}
-
-.exercise-block {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-.exercise-block h4 {
-    margin-bottom: 1rem;
-    font-size: 1rem;
-}
 
 /* ================================
    EXERCISE LIBRARY - exercises.html
