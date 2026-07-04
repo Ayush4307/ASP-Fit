@@ -13,9 +13,7 @@
 
     <!-- Top Navigation Bar -->
     <nav class="sidebar">
-        <div class="logo">
-            <h2>ASP Fit</h2>
-        </div>
+        <div class="logo"><h2>ASP Fit</h2></div>
         <ul class="nav-links">
             <li><a href="index.html">Dashboard</a></li>
             <li><a href="tracker.html" class="active">Tracker</a></li>
@@ -27,74 +25,86 @@
         <button class="nav-theme-btn" onclick="toggleTheme()">🌙 Theme</button>
     </nav>
 
-    <!-- Main Tracker Content -->
     <main class="tracker-content" role="main">
-        
-        <!-- Tracker Header -->
+
+        <!-- Header -->
         <header class="tracker-header">
             <div>
                 <h1>Workout Tracker</h1>
                 <p>Log your session and beat your records.</p>
             </div>
-                        <div id="stopwatch-section" class="stopwatch-section">
-                <h3 class="stopwatch-title">Stopwatch</h3>
-                <h2 id="stopwatch-display" class="stopwatch-display">00:00:00</h2>
+        </header>
+
+        <!-- Timers Row -->
+        <div class="timers-row">
+
+            <!-- Stopwatch -->
+            <div class="timer-card card">
+                <p class="timer-label">⏱ Session Timer</p>
+                <div id="stopwatch-display" class="stopwatch-display">00:00:00</div>
                 <div class="stopwatch-controls">
-                    <button type="button" id="sw-start-btn" class="btn-primary">Start</button>
-                    <button type="button" id="sw-stop-btn" class="btn-secondary">Stop</button>
-                    <button type="button" id="sw-reset-btn" class="btn-secondary">Reset</button>
+                    <button id="sw-start-btn" class="btn-primary">Start</button>
+                    <button id="sw-stop-btn" class="btn-secondary">Pause</button>
+                    <button id="sw-reset-btn" class="btn-secondary">Reset</button>
                 </div>
             </div>
-            <!-- The Bright Blue Primary Button -->
-            <button id="start-timer-btn" class="btn-primary">â± Start Rest Timer</button>
-        </header>
+
+            <!-- Rest Timer -->
+            <div class="timer-card card">
+                <p class="timer-label">😮‍💨 Rest Timer</p>
+                <div id="rest-display" class="stopwatch-display">1:00</div>
+                <div class="rest-duration-select">
+                    <button class="rest-btn active" data-secs="60">1 min</button>
+                    <button class="rest-btn" data-secs="90">90s</button>
+                    <button class="rest-btn" data-secs="120">2 min</button>
+                    <button class="rest-btn" data-secs="180">3 min</button>
+                </div>
+                <button id="start-timer-btn" class="btn-primary" style="margin-top:0.75rem; width:100%;">Start Rest</button>
+            </div>
+
+        </div>
 
         <!-- Workout Form -->
         <section class="workout-logging-section">
             <form id="workout-form">
-                
-                <!-- Session Details -->
+
+                <!-- Session metadata -->
                 <div class="session-metadata">
                     <div class="input-group">
-                        <label for="workout-date">Date</label>
+                        <label for="workout-date">📅 Date</label>
                         <input type="date" id="workout-date" required>
                     </div>
-                    
                     <div class="input-group">
-                        <label for="workout-type">Split</label>
+                        <label for="workout-type">💪 Split</label>
                         <select id="workout-type">
                             <option value="Push">Push</option>
                             <option value="Pull">Pull</option>
                             <option value="Legs">Legs</option>
                             <option value="Full Body">Full Body</option>
+                            <option value="Upper">Upper</option>
+                            <option value="Lower">Lower</option>
+                            <option value="Cardio">Cardio</option>
                         </select>
                     </div>
                 </div>
 
-                <!-- Exercise List (JavaScript will add rows here dynamically) -->
+                <!-- Exercise blocks container -->
                 <div id="exercise-list-container">
-                    <h3>Exercises</h3>
-                    
-                    <!-- Example of a single exercise block -->
-                    <div class="exercise-block">
-                        <h4>Bench Press</h4>
-                        <div class="set-row">
-                            <span class="set-number">Set 1</span>
-                            <input type="number" placeholder="kg" class="weight-input">
-                            <input type="number" placeholder="reps" class="reps-input">
-                            <input type="checkbox" class="done-check">
-                        </div>
-                    </div>
+                    <p class="section-label">Exercises</p>
+                    <!-- JS adds blocks here -->
                 </div>
 
-                <!-- Action Buttons -->
+                <!-- Actions -->
                 <div class="form-actions">
                     <button type="button" id="add-exercise-btn" class="btn-secondary">+ Add Exercise</button>
-                    <button type="submit" id="finish-workout-btn" class="btn-primary">Finish Workout</button>
+                    <button type="submit" id="finish-workout-btn" class="btn-primary">✅ Finish Workout</button>
                 </div>
-                
+
             </form>
         </section>
+
+        <!-- Toast notification -->
+        <div id="toast" class="toast"></div>
 
     </main>
 
@@ -102,4 +112,3 @@
     <script src="JS/tracker.js"></script>
 </body>
 </html>
-
