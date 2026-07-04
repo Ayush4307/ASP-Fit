@@ -29,36 +29,81 @@
 
     <!-- Main Dashboard Content -->
     <main class="dashboard-content" role="main">
-        
+
         <!-- Welcome Header -->
         <header class="dashboard-header">
-            <h1>Welcome back, Ayush</h1>
-            <p class="streak-badge" id="streak-badge">🔥 4 Day Streak</p>
+            <div>
+                <h1>Welcome back, Ayush 👋</h1>
+                <p id="streak-badge" class="streak-badge">💪 Start Your Streak Today!</p>
+            </div>
+            <a href="tracker.html" class="btn-primary" style="text-decoration:none;">+ Log Workout</a>
         </header>
 
-        <!-- Daily Motivation Section -->
+        <!-- Stats Cards Row -->
+        <section class="stats-grid">
+            <div class="stat-card card">
+                <div class="stat-icon">💪</div>
+                <div class="stat-info">
+                    <span class="stat-value" id="stat-workouts">0</span>
+                    <span class="stat-label">Total Workouts</span>
+                </div>
+            </div>
+            <div class="stat-card card">
+                <div class="stat-icon">🔥</div>
+                <div class="stat-info">
+                    <span class="stat-value" id="stat-streak">0</span>
+                    <span class="stat-label">Day Streak</span>
+                </div>
+            </div>
+            <div class="stat-card card">
+                <div class="stat-icon">⚖️</div>
+                <div class="stat-info">
+                    <span class="stat-value" id="stat-volume">0</span>
+                    <span class="stat-label">Total Volume (kg)</span>
+                </div>
+            </div>
+            <div class="stat-card card">
+                <div class="stat-icon">🏆</div>
+                <div class="stat-info">
+                    <span class="stat-value" id="stat-prs">0</span>
+                    <span class="stat-label">Personal Records</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Daily Motivation -->
         <section class="daily-quote-section">
             <blockquote id="daily-quote">
                 "The only bad workout is the one that didn't happen."
             </blockquote>
         </section>
 
-        <!-- Daily Task Section -->
-        <section class="daily-task-section">
-            <h2>Today's Focus</h2>
-            <div class="task-card">
-                <input type="checkbox" id="daily-task-checkbox">
-                <label for="daily-task-checkbox" id="daily-task-text">Hit 10k steps today</label>
-            </div>
-        </section>
+        <!-- Two column: Task + Recent -->
+        <div class="dashboard-grid">
 
-        <!-- Recent Workouts (populated dynamically by app.js) -->
-        <section class="recent-activity-section">
-            <h2>Recent Workouts</h2>
-            <div id="recent-workouts-list">
-                <!-- JS will render real workouts here -->
-            </div>
-        </section>
+            <!-- Today's Focus -->
+            <section class="daily-task-section">
+                <h2>Today's Focus</h2>
+                <div class="task-card card">
+                    <input type="checkbox" id="daily-task-checkbox">
+                    <label for="daily-task-checkbox" id="daily-task-text">Hit 10k steps today</label>
+                </div>
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <a href="tracker.html" class="btn-primary" style="text-decoration:none;">Start Workout →</a>
+                    <a href="progress.html" class="btn-secondary" style="text-decoration:none;">View Progress</a>
+                </div>
+            </section>
+
+            <!-- Recent Workouts -->
+            <section class="recent-activity-section">
+                <h2>Recent Workouts</h2>
+                <div id="recent-workouts-list">
+                    <!-- JS will render real workouts here -->
+                </div>
+            </section>
+
+        </div>
 
     </main>
 
