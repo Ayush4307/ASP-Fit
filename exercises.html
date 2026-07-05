@@ -13,9 +13,7 @@
 
     <!-- Top Navigation Bar -->
     <nav class="sidebar">
-        <div class="logo">
-            <h2>ASP Fit</h2>
-        </div>
+        <div class="logo"><h2>ASP Fit</h2></div>
         <ul class="nav-links">
             <li><a href="index.html">Dashboard</a></li>
             <li><a href="tracker.html">Tracker</a></li>
@@ -27,41 +25,42 @@
         <button class="nav-theme-btn" onclick="toggleTheme()">🌙 Theme</button>
     </nav>
 
-    <!-- Main Exercises Content -->
     <main class="exercises-content" role="main">
-        
+
         <header class="exercises-header">
-            <h1>Exercise Library</h1>
-            <p>Master your form and learn new movements.</p>
+            <div>
+                <h1>Exercise Library</h1>
+                <p>Master your form. Find new movements.</p>
+            </div>
         </header>
 
-        <!-- Filter Bar -->
-        <section class="filter-section">
-            <div class="filter-bar">
-                <button class="filter-btn active">All</button>
-                <button class="filter-btn">Chest</button>
-                <button class="filter-btn">Back</button>
-                <button class="filter-btn">Legs</button>
-                <button class="filter-btn">Shoulders</button>
-                <button class="filter-btn">Arms</button>
-                <button class="filter-btn">Core</button>
-            </div>
-            
-            <!-- Search Bar -->
+        <!-- Search + Filter row -->
+        <div class="exercises-controls">
             <div class="search-container">
-                <input type="text" id="exercise-search" placeholder="Search exercises...">
+                <input type="text" id="exercise-search" placeholder="🔍 Search exercises...">
             </div>
-        </section>
+            <div class="filter-bar" id="filter-bar">
+                <button class="filter-btn active" data-muscle="All">All</button>
+                <button class="filter-btn" data-muscle="Chest">Chest</button>
+                <button class="filter-btn" data-muscle="Back">Back</button>
+                <button class="filter-btn" data-muscle="Legs">Legs</button>
+                <button class="filter-btn" data-muscle="Shoulders">Shoulders</button>
+                <button class="filter-btn" data-muscle="Arms">Arms</button>
+                <button class="filter-btn" data-muscle="Core">Core</button>
+            </div>
+        </div>
 
-        <!-- Exercise Grid -->
-        <section class="exercise-grid-section">
-                        <div class="card" style="margin-bottom: 20px;">
-                <h3 style="margin-bottom: 10px;">➕ Add Custom Exercise</h3>
-                <form id="add-custom-exercise-form">
+        <!-- Add Custom Exercise -->
+        <div class="card custom-exercise-form-card">
+            <h3>➕ Add Custom Exercise</h3>
+            <form id="add-custom-exercise-form">
+                <div class="custom-form-row">
                     <div class="input-group">
-                        <input type="text" id="custom-ex-name" placeholder="Exercise Name (e.g., Bulgarian Split Squat)" required>
+                        <label for="custom-ex-name">Exercise Name</label>
+                        <input type="text" id="custom-ex-name" placeholder="e.g. Bulgarian Split Squat" required>
                     </div>
                     <div class="input-group">
+                        <label for="custom-ex-muscle">Muscle Group</label>
                         <select id="custom-ex-muscle" required>
                             <option value="Chest">Chest</option>
                             <option value="Back">Back</option>
@@ -71,229 +70,19 @@
                             <option value="Core">Core</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn-primary">Add Exercise</button>
-                </form>
-            </div>
-            <div class="exercise-grid" id="exercise-grid">
-                
-                <!-- ===== CHEST ===== -->
-                <div class="exercise-card card" data-muscle="Chest">
-                    <h3>Barbell Bench Press</h3>
-                    <span class="muscle-tag">Chest</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">4 × 8–10 reps</p>
-                    <span class="difficulty-tag beginner">Beginner</span>
+                    <button type="submit" class="btn-primary">Add</button>
                 </div>
+            </form>
+        </div>
 
-                <div class="exercise-card card" data-muscle="Chest">
-                    <h3>Incline Dumbbell Press</h3>
-                    <span class="muscle-tag">Chest</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">3 × 10–12 reps</p>
-                    <span class="difficulty-tag intermediate">Intermediate</span>
-                </div>
+        <!-- Exercise Count -->
+        <p class="exercise-count" id="exercise-count"></p>
 
-                <div class="exercise-card card" data-muscle="Chest">
-                    <h3>Cable Chest Fly</h3>
-                    <span class="muscle-tag">Chest</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">3 × 12–15 reps</p>
-                    <span class="difficulty-tag beginner">Beginner</span>
-                </div>
+        <!-- Exercise Grid — rendered by JS -->
+        <div class="exercise-grid" id="exercise-grid"></div>
 
-                <div class="exercise-card card" data-muscle="Chest">
-                    <h3>Dips (Chest Variation)</h3>
-                    <span class="muscle-tag">Chest</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">3 × 10–15 reps</p>
-                    <span class="difficulty-tag intermediate">Intermediate</span>
-                </div>
-
-                <div class="exercise-card card" data-muscle="Chest">
-                    <h3>Push-Ups</h3>
-                    <span class="muscle-tag">Chest</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">3 × 15–20 reps</p>
-                    <span class="difficulty-tag beginner">Beginner</span>
-                </div>
-
-                <!-- ===== BACK ===== -->
-                <div class="exercise-card card" data-muscle="Back">
-                    <h3>Pull-Ups</h3>
-                    <span class="muscle-tag">Back</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">4 × 6–10 reps</p>
-                    <span class="difficulty-tag intermediate">Intermediate</span>
-                </div>
-
-                <div class="exercise-card card" data-muscle="Back">
-                    <h3>Barbell Deadlift</h3>
-                    <span class="muscle-tag">Back</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">4 × 5 reps</p>
-                    <span class="difficulty-tag advanced">Advanced</span>
-                </div>
-
-                <div class="exercise-card card" data-muscle="Back">
-                    <h3>Seated Cable Row</h3>
-                    <span class="muscle-tag">Back</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">3 × 10–12 reps</p>
-                    <span class="difficulty-tag beginner">Beginner</span>
-                </div>
-
-                <div class="exercise-card card" data-muscle="Back">
-                    <h3>Lat Pulldown</h3>
-                    <span class="muscle-tag">Back</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">3 × 10–12 reps</p>
-                    <span class="difficulty-tag beginner">Beginner</span>
-                </div>
-
-                <div class="exercise-card card" data-muscle="Back">
-                    <h3>Dumbbell Row</h3>
-                    <span class="muscle-tag">Back</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">3 × 10–12 reps each</p>
-                    <span class="difficulty-tag beginner">Beginner</span>
-                </div>
-
-                <!-- ===== LEGS ===== -->
-                <div class="exercise-card card" data-muscle="Legs">
-                    <h3>Barbell Squat</h3>
-                    <span class="muscle-tag">Legs</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">4 × 6–8 reps</p>
-                    <span class="difficulty-tag intermediate">Intermediate</span>
-                </div>
-
-                <div class="exercise-card card" data-muscle="Legs">
-                    <h3>Romanian Deadlift</h3>
-                    <span class="muscle-tag">Legs</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">3 × 10–12 reps</p>
-                    <span class="difficulty-tag intermediate">Intermediate</span>
-                </div>
-
-                <div class="exercise-card card" data-muscle="Legs">
-                    <h3>Leg Press</h3>
-                    <span class="muscle-tag">Legs</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">4 × 10–15 reps</p>
-                    <span class="difficulty-tag beginner">Beginner</span>
-                </div>
-
-                <div class="exercise-card card" data-muscle="Legs">
-                    <h3>Bulgarian Split Squat</h3>
-                    <span class="muscle-tag">Legs</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">3 × 8–10 each leg</p>
-                    <span class="difficulty-tag advanced">Advanced</span>
-                </div>
-
-                <div class="exercise-card card" data-muscle="Legs">
-                    <h3>Leg Curl</h3>
-                    <span class="muscle-tag">Legs</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">3 × 12–15 reps</p>
-                    <span class="difficulty-tag beginner">Beginner</span>
-                </div>
-
-                <!-- ===== SHOULDERS ===== -->
-                <div class="exercise-card card" data-muscle="Shoulders">
-                    <h3>Overhead Press</h3>
-                    <span class="muscle-tag">Shoulders</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">4 × 6–8 reps</p>
-                    <span class="difficulty-tag intermediate">Intermediate</span>
-                </div>
-
-                <div class="exercise-card card" data-muscle="Shoulders">
-                    <h3>Lateral Raises</h3>
-                    <span class="muscle-tag">Shoulders</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">3 × 15–20 reps</p>
-                    <span class="difficulty-tag beginner">Beginner</span>
-                </div>
-
-                <div class="exercise-card card" data-muscle="Shoulders">
-                    <h3>Face Pulls</h3>
-                    <span class="muscle-tag">Shoulders</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">3 × 15–20 reps</p>
-                    <span class="difficulty-tag beginner">Beginner</span>
-                </div>
-
-                <div class="exercise-card card" data-muscle="Shoulders">
-                    <h3>Arnold Press</h3>
-                    <span class="muscle-tag">Shoulders</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">3 × 10–12 reps</p>
-                    <span class="difficulty-tag intermediate">Intermediate</span>
-                </div>
-
-                <div class="exercise-card card" data-muscle="Shoulders">
-                    <h3>Rear Delt Fly</h3>
-                    <span class="muscle-tag">Shoulders</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">3 × 15 reps</p>
-                    <span class="difficulty-tag beginner">Beginner</span>
-                </div>
-
-                <!-- ===== ARMS ===== -->
-                <div class="exercise-card card" data-muscle="Arms">
-                    <h3>Barbell Curl</h3>
-                    <span class="muscle-tag">Arms</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">3 × 10–12 reps</p>
-                    <span class="difficulty-tag beginner">Beginner</span>
-                </div>
-
-                <div class="exercise-card card" data-muscle="Arms">
-                    <h3>Tricep Pushdown</h3>
-                    <span class="muscle-tag">Arms</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">3 × 12–15 reps</p>
-                    <span class="difficulty-tag beginner">Beginner</span>
-                </div>
-
-                <div class="exercise-card card" data-muscle="Arms">
-                    <h3>Hammer Curl</h3>
-                    <span class="muscle-tag">Arms</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">3 × 12 reps each</p>
-                    <span class="difficulty-tag beginner">Beginner</span>
-                </div>
-
-                <div class="exercise-card card" data-muscle="Arms">
-                    <h3>Skull Crushers</h3>
-                    <span class="muscle-tag">Arms</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">3 × 10–12 reps</p>
-                    <span class="difficulty-tag intermediate">Intermediate</span>
-                </div>
-
-                <div class="exercise-card card" data-muscle="Arms">
-                    <h3>Concentration Curl</h3>
-                    <span class="muscle-tag">Arms</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">3 × 12 reps each</p>
-                    <span class="difficulty-tag beginner">Beginner</span>
-                </div>
-
-                <!-- ===== CORE ===== -->
-                <div class="exercise-card card" data-muscle="Core">
-                    <h3>Plank</h3>
-                    <span class="muscle-tag">Core</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">3 × 45–60 seconds</p>
-                    <span class="difficulty-tag beginner">Beginner</span>
-                </div>
-
-                <div class="exercise-card card" data-muscle="Core">
-                    <h3>Cable Crunch</h3>
-                    <span class="muscle-tag">Core</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">3 × 15–20 reps</p>
-                    <span class="difficulty-tag beginner">Beginner</span>
-                </div>
-
-                <div class="exercise-card card" data-muscle="Core">
-                    <h3>Hanging Leg Raise</h3>
-                    <span class="muscle-tag">Core</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">3 × 12–15 reps</p>
-                    <span class="difficulty-tag intermediate">Intermediate</span>
-                </div>
-
-                <div class="exercise-card card" data-muscle="Core">
-                    <h3>Ab Wheel Rollout</h3>
-                    <span class="muscle-tag">Core</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">3 × 10 reps</p>
-                    <span class="difficulty-tag advanced">Advanced</span>
-                </div>
-
-                <div class="exercise-card card" data-muscle="Core">
-                    <h3>Russian Twist</h3>
-                    <span class="muscle-tag">Core</span>
-                    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-secondary);">3 × 20 reps</p>
-                    <span class="difficulty-tag beginner">Beginner</span>
-                </div>
-
-            </div>
-        </section>
+        <!-- Toast -->
+        <div id="ex-toast" class="toast"></div>
 
     </main>
 
@@ -301,4 +90,3 @@
     <script src="JS/exercises.js"></script>
 </body>
 </html>
-
