@@ -40,8 +40,22 @@ const Tracker = {
         // Form submit
         form.addEventListener('submit', Tracker.saveWorkout);
 
-        // Add a default exercise block on load
-        Tracker.addExerciseBlock();
+        // Load any exercises queued from the Exercise Library
+        Tracker.loadPendingExercises();
+    },
+
+    // ---- LOAD EXERCISES FROM LIBRARY ----
+    loadPendingExercises: () => {
+        const pending = JSON.parse(sessionStorage.getItem('pendingExercises') || '[]');
+        if (pending.length > 0) {
+            pending.forEach(name => {
+                Tracker.addExerciseBlock(name);
+            });
+            sessionStorage.removeItem('pendingExercises');
+        } else {
+            // Add one blank block by default
+            Tracker.addExerciseBlock();
+        }
     },
 
     // ---- STOPWATCH ----
@@ -128,7 +142,7 @@ const Tracker = {
     },
 
     // ---- EXERCISE BLOCKS ----
-    addExerciseBlock: () => {
+    addExerciseBlock: (prefillName = '') => {
         const container = document.getElementById('exercise-list-container');
         const blockId = `block-${Date.now()}`;
 
@@ -137,7 +151,7 @@ const Tracker = {
         block.id = blockId;
         block.innerHTML = `
             <div class="exercise-block-header">
-                <input type="text" placeholder="Exercise name (e.g. Bench Press)" class="exercise-name-input" required>
+                <input type="text" placeholder="Exercise name (e.g. Bench Press)" class="exercise-name-input" value="${prefillName}" required>
                 <button type="button" class="remove-block-btn" onclick="document.getElementById('${blockId}').remove()">✕</button>
             </div>
             <div class="sets-table-header">
