@@ -22,7 +22,8 @@
 }
 
 /* --- Dark Mode Variables --- */
-body.dark-theme {
+body.dark-theme,
+html.dark-theme body {
     --bg-primary:         #0F172A;
     --bg-surface:         #1E293B;
     --bg-hover:           #273549;

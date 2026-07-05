@@ -26,11 +26,15 @@ const ThemeManager = {
         if (btn) btn.innerText = document.body.classList.contains('dark-theme') ? '☀️ Theme' : '🌙 Theme';
     },
     init: () => {
-        if (Storage.get('theme') === 'dark') document.body.classList.add('dark-theme');
+        if (Storage.get('theme') === 'dark') {
+            document.body.classList.add('dark-theme');
+            document.documentElement.classList.add('dark-theme');
+        }
         ThemeManager.updateBtn();
     },
     toggle: () => {
         document.body.classList.toggle('dark-theme');
+        document.documentElement.classList.toggle('dark-theme');
         const isDark = document.body.classList.contains('dark-theme');
         Storage.save('theme', isDark ? 'dark' : 'light');
         ThemeManager.updateBtn();

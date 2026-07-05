@@ -184,6 +184,8 @@ const Learn = {
         document.getElementById('modal-body').innerHTML = article.body;
         document.getElementById('article-modal').classList.add('open');
         document.body.style.overflow = 'hidden';
+        // Mark as read for Scholar achievement badge
+        Storage.save('readArticle', true);
     },
 
     closeModal: () => {
