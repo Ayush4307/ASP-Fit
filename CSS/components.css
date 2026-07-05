@@ -50,7 +50,7 @@
 }
 
 .nav-links a:hover {
-    background-color: #F1F5F9;
+    background-color: var(--bg-hover);
     color: var(--text-primary);
 }
 
@@ -75,7 +75,7 @@
 }
 
 .nav-theme-btn:hover {
-    background-color: #F1F5F9;
+    background-color: var(--bg-hover);
     color: var(--text-primary);
 }
 
@@ -123,7 +123,7 @@
 }
 
 .btn-secondary {
-    background-color: #FFFFFF;
+    background-color: var(--bg-surface);
     color: var(--text-primary);
     border: 1px solid var(--border-color);
     padding: 0.75rem 1.5rem;
@@ -135,7 +135,7 @@
 }
 
 .btn-secondary:hover {
-    background-color: #F8FAFC;
+    background-color: var(--bg-hover);
 }
 
 /* --- Form Inputs --- */
@@ -157,9 +157,9 @@ input[type="number"],
 input[type="date"],
 select {
     padding: 0.75rem 1rem;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--input-border);
     border-radius: 8px;
-    background-color: #FFFFFF;
+    background-color: var(--input-bg);
     color: var(--text-primary);
     font-family: inherit;
     font-size: 0.95rem;
@@ -234,10 +234,15 @@ body.dark-theme select {
     color: #F8FAFC;
 }
 
-body.dark-theme .nav-links a:hover,
-body.dark-theme .nav-theme-btn:hover {
-    background-color: #1E293B;
-}
+/* Dark mode overrides for hardcoded colors */
+body.dark-theme .heatmap-cell.level-0 { background-color: #334155; }
+body.dark-theme .badge.earned { background: rgba(245,158,11,0.12); }
+body.dark-theme .difficulty-tag.beginner { background: #064E3B; color: #6EE7B7; }
+body.dark-theme .difficulty-tag.intermediate { background: #78350F; color: #FCD34D; }
+body.dark-theme .difficulty-tag.advanced { background: #7F1D1D; color: #FCA5A5; }
+body.dark-theme .remove-block-btn:hover { background: #3B1F1F; }
+body.dark-theme .modal-close-btn:hover { background: #3B1F1F; color: #FCA5A5; border-color: #EF4444; }
+body.dark-theme .daily-quote-section blockquote { background-color: rgba(37,99,235,0.12); }
 
 /* --- Custom Exercise Badge Style --- */
 .custom-ex-card {

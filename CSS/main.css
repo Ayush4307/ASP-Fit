@@ -1,29 +1,45 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 /* --- CSS Variables (Design Tokens) --- */
 :root {
-    /* Professional Minimalist Colors */
-    --bg-primary: #F8FAFC;       /* Very light, clean background */
-    --bg-surface: #FFFFFF;       /* Pure white for cards */
-    
-    /* The Bright Blue Accent */
-    --accent-blue: #2563EB;      
-    --accent-blue-hover: #1D4ED8;
-    
-    /* Text Colors */
-    --text-primary: #0F172A;     /* Sharp, dark text for headings */
-    --text-secondary: #64748B;   /* Softer gray for descriptions */
-    
-    /* Borders & UI */
-    --border-color: #E2E8F0;
-    --border-radius: 12px;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05);
+    --bg-primary:         #F8FAFC;
+    --bg-surface:         #FFFFFF;
+    --bg-hover:           #F1F5F9;
+
+    --accent-blue:        #2563EB;
+    --accent-blue-hover:  #1D4ED8;
+
+    --text-primary:       #0F172A;
+    --text-secondary:     #64748B;
+
+    --border-color:       #E2E8F0;
+    --border-radius:      12px;
+    --shadow-sm:          0 1px 3px rgba(0,0,0,0.06);
+    --shadow-md:          0 4px 12px rgba(0,0,0,0.08);
+
+    --input-bg:           #FFFFFF;
+    --input-border:       #E2E8F0;
+}
+
+/* --- Dark Mode Variables --- */
+body.dark-theme {
+    --bg-primary:         #0F172A;
+    --bg-surface:         #1E293B;
+    --bg-hover:           #273549;
+
+    --text-primary:       #F8FAFC;
+    --text-secondary:     #94A3B8;
+
+    --border-color:       #334155;
+    --shadow-sm:          0 1px 3px rgba(0,0,0,0.4);
+    --shadow-md:          0 4px 12px rgba(0,0,0,0.5);
+
+    --input-bg:           #0F172A;
+    --input-border:       #334155;
 }
 
 /* --- Global Resets --- */
-* {
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -34,15 +50,12 @@ body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.5;
-    
-    /* This lays out the Sidebar on the left and Content on the right */
-    display: flex;
     min-height: 100vh;
+    /* NOTE: No display:flex here — top navbar is fixed, content flows normally */
 }
 
-
 h1, h2, h3, h4 {
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.02em;
     color: var(--text-primary);
 }
@@ -54,12 +67,4 @@ a {
 
 ul {
     list-style: none;
-}
-/* --- Dark Mode Variables --- */
-body.dark-theme {
-    --bg-primary: #0F172A;
-    --bg-surface: #1E293B;
-    --text-primary: #F8FAFC;
-    --text-secondary: #94A3B8;
-    --border-color: #334155;
 }

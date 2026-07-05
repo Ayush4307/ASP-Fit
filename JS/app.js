@@ -21,13 +21,19 @@ const Storage = {
 
 // --- 2. Theme Management ---
 const ThemeManager = {
+    updateBtn: () => {
+        const btn = document.querySelector('.nav-theme-btn');
+        if (btn) btn.innerText = document.body.classList.contains('dark-theme') ? '☀️ Theme' : '🌙 Theme';
+    },
     init: () => {
         if (Storage.get('theme') === 'dark') document.body.classList.add('dark-theme');
+        ThemeManager.updateBtn();
     },
     toggle: () => {
         document.body.classList.toggle('dark-theme');
         const isDark = document.body.classList.contains('dark-theme');
         Storage.save('theme', isDark ? 'dark' : 'light');
+        ThemeManager.updateBtn();
     }
 };
 window.toggleTheme = ThemeManager.toggle;
