@@ -1016,30 +1016,108 @@
 
 
 /* ================================
-   MOBILE RESPONSIVE for pages.css
+   MOBILE RESPONSIVE - pages.css
+   All breakpoints consolidated here
 ================================ */
-@media (max-width: 768px) {
-    .exercise-grid {
-        grid-template-columns: 1fr;
-    }
 
-    .articles-grid {
-        grid-template-columns: 1fr;
-    }
+/* --- Tablet: 900px --- */
+@media (max-width: 900px) {
+    /* Dashboard */
+    .stats-grid        { grid-template-columns: repeat(2, 1fr); }
+    .dashboard-grid    { grid-template-columns: 1fr; }
 
-    .filter-bar {
-        gap: 0.35rem;
-    }
+    /* Progress */
+    .progress-stats-row { grid-template-columns: repeat(2, 1fr); }
+    .analytics-grid     { grid-template-columns: 1fr; }
+    .chart-section      { grid-column: 1; }
 
-    .dashboard-header h1,
-    .tracker-header h1,
-    .exercises-header h1,
-    .progress-header h1,
-    .learn-header h1,
-    .profile-header h1 {
-        font-size: 1.5rem;
-    }
+    /* Learn */
+    .articles-grid      { grid-template-columns: repeat(2, 1fr); }
+
+    /* Exercises */
+    .exercise-grid      { grid-template-columns: repeat(3, 1fr); }
 }
+
+/* --- Mobile: 768px --- */
+@media (max-width: 768px) {
+
+    /* ---- NAVBAR on mobile becomes bottom tab bar ---- */
+    /* (handled in components.css) */
+    /* All page content gets bottom padding for the tab bar */
+    .dashboard-content, .tracker-content, .exercises-content,
+    .progress-content, .learn-content, .profile-content {
+        padding: 1.25rem 1rem;
+        padding-top: calc(70px + 1rem);
+        padding-bottom: 80px; /* space for bottom nav */
+    }
+
+    /* ---- TYPOGRAPHY ---- */
+    .dashboard-header h1, .tracker-header h1,
+    .exercises-header h1, .progress-header h1,
+    .learn-header h1, .profile-header h1 {
+        font-size: 1.35rem;
+    }
+
+    /* ---- DASHBOARD ---- */
+    .dashboard-header   { flex-direction: column; align-items: flex-start; }
+    .stats-grid         { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+    .dashboard-grid     { grid-template-columns: 1fr; }
+    .quick-actions      { flex-wrap: wrap; }
+    .stat-value         { font-size: 1.4rem; }
+
+    /* ---- TRACKER ---- */
+    .timers-row         { grid-template-columns: 1fr; }
+    .session-metadata   { flex-direction: column; gap: 0.75rem; }
+    .form-actions       { flex-direction: column; }
+    .form-actions .btn-primary,
+    .form-actions .btn-secondary { width: 100%; text-align: center; }
+    .stopwatch-display  { font-size: 1.75rem; }
+    .sets-table-header,
+    .set-row            { grid-template-columns: 40px 1fr 1fr 32px; }
+
+    /* ---- EXERCISES ---- */
+    .exercise-grid          { grid-template-columns: repeat(2, 1fr); }
+    .custom-form-row        { flex-direction: column; }
+    .custom-form-row button { width: 100%; }
+    .exercises-controls     { gap: 0.5rem; }
+
+    /* ---- PROGRESS ---- */
+    .progress-header        { flex-direction: column; align-items: flex-start; }
+    .progress-stats-row     { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+    .analytics-grid         { grid-template-columns: 1fr; }
+    .heatmap-grid           { grid-template-columns: repeat(7, 1fr); }
+    .chart-container        { height: 200px; }
+
+    /* ---- LEARN ---- */
+    .articles-grid      { grid-template-columns: 1fr; }
+    .modal-content      { padding: 1.25rem; margin: 0.75rem; max-height: 90vh; }
+    #modal-title        { font-size: 1.15rem; }
+
+    /* ---- PROFILE ---- */
+    .profile-header         { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .profile-grid           { grid-template-columns: 1fr; }
+    .badges-grid            { grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+    .badge-icon             { font-size: 1.25rem; }
+    .danger-zone            { flex-direction: column; align-items: flex-start; }
+
+    /* ---- FILTER BARS ---- */
+    .filter-bar     { gap: 0.35rem; }
+    .filter-btn     { padding: 0.35rem 0.7rem; font-size: 0.78rem; }
+
+    /* ---- CARDS ---- */
+    .card { border-radius: 10px; }
+}
+
+/* --- Small Mobile: 480px --- */
+@media (max-width: 480px) {
+    .stats-grid         { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+    .exercise-grid      { grid-template-columns: 1fr; }
+    .badges-grid        { grid-template-columns: repeat(3, 1fr); }
+    .progress-stats-row { grid-template-columns: repeat(2, 1fr); }
+    .heatmap-grid       { grid-template-columns: repeat(6, 1fr); }
+}
+
+
 
 /* ================================
    EXERCISES - exercises.html
