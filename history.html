@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASP Fit | Workout History</title>
+    <link rel="stylesheet" href="CSS/main.css">
+    <link rel="stylesheet" href="CSS/components.css">
+    <link rel="stylesheet" href="CSS/animations.css">
+    <link rel="stylesheet" href="CSS/pages.css">
+    <script>if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark-theme');</script>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="logo"><h2>ASP Fit</h2></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="tracker.html">Tracker</a></li>
+            <li><a href="exercises.html">Exercises</a></li>
+            <li><a href="history.html" class="active">History</a></li>
+            <li><a href="progress.html">Progress</a></li>
+            <li><a href="learn.html">Learn</a></li>
+            <li><a href="profile.html">Profile</a></li>
+        </ul>
+        <button class="nav-theme-btn" onclick="toggleTheme()">🌙 Theme</button>
+    </nav>
+
+    <main class="history-content" role="main">
+
+        <header class="history-header">
+            <div>
+                <h1>Workout History</h1>
+                <p>Every session you've logged, in one place.</p>
+            </div>
+            <a href="tracker.html" class="btn-primary" style="text-decoration:none;">+ Log Workout</a>
+        </header>
+
+        <!-- Filter + Search row -->
+        <div class="history-controls">
+            <div class="search-container">
+                <input type="text" id="history-search" placeholder="🔍 Search by exercise or split...">
+            </div>
+            <div class="filter-bar" id="history-filter-bar">
+                <button class="filter-btn active" data-split="All">All</button>
+                <button class="filter-btn" data-split="Push">Push</button>
+                <button class="filter-btn" data-split="Pull">Pull</button>
+                <button class="filter-btn" data-split="Legs">Legs</button>
+                <button class="filter-btn" data-split="Upper">Upper</button>
+                <button class="filter-btn" data-split="Lower">Lower</button>
+                <button class="filter-btn" data-split="Full Body">Full Body</button>
+            </div>
+        </div>
+
+        <!-- Summary bar -->
+        <div class="history-summary">
+            <span id="hist-count">0 workouts</span>
+            <span class="dot">·</span>
+            <span id="hist-volume">0 kg total volume</span>
+            <span class="dot">·</span>
+            <span id="hist-sets">0 total sets</span>
+        </div>
+
+        <!-- Workout list -->
+        <div id="history-list"></div>
+
+    </main>
+
+    <!-- Delete confirm toast -->
+    <div id="hist-toast" class="toast"></div>
+
+    <script src="JS/app.js"></script>
+    <script src="JS/history.js"></script>
+</body>
+</html>
