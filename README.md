@@ -129,6 +129,13 @@ Or use the **Live Server** extension in VS Code for auto-reload.
 
 ---
 
+## 🤝 Contributing & Security
+
+- **Contributing**: Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to contribute.
+- **Security**: Please see our [SECURITY.md](SECURITY.md) for details on our security policy and how to report vulnerabilities.
+
+---
+
 ## 📄 License
 
 Built by **Ayush Singh Pawar** for personal use and portfolio demonstration.
