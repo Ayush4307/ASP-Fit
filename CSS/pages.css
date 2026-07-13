@@ -1240,7 +1240,7 @@
     /* (handled in components.css) */
     /* All page content gets bottom padding for the tab bar */
     .dashboard-content, .tracker-content, .exercises-content,
-    .progress-content, .learn-content, .profile-content {
+    .history-content, .progress-content, .learn-content, .profile-content {
         padding: 1.25rem 1rem;
         padding-top: calc(70px + 1rem);
         padding-bottom: 80px; /* space for bottom nav */
